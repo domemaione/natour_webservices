@@ -12,7 +12,7 @@ public interface IItinerarioService { //
     List<ItinerarioDTO> getAll(); //metodo astratto senza corpo
     ItinerarioDTO getById(Long id);
     ItinerarioDTO addItinerario(ItinerarioDTO itinerario);
-    
+    boolean deleteItinerarioById(Long id);
 }
 
 

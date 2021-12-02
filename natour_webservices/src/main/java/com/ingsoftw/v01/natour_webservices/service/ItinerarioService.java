@@ -14,10 +14,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class ItinerarioService implements IItinerarioService{ //questa è l'implementazione dell'interfaccia IItinerarioService
     @Autowired //sto definendo un bean, ovvero una variabile già definita e precaricata in memoria da spring
-    ItinerarioRepository itinerarioRepository;
+    private ItinerarioRepository itinerarioRepository;
 
     @Autowired
-    ItinerarioMapper itinerarioMapper;
+    private ItinerarioMapper itinerarioMapper;
 
     @Override
     public List<ItinerarioDTO> getAll() {
@@ -43,5 +43,20 @@ public class ItinerarioService implements IItinerarioService{ //questa è l'impl
         return itinerarioMapper.toDto(itinerarioRepository.save(itinerarioMapper.toModel(itinerario))); //prende questo oggetto e lo mette nel db
     }
 
-    
+    @Override
+    public boolean deleteItinerarioById(Long id) { //cancella itinerario attraverso l'id
+
+        try{
+            this.itinerarioRepository.deleteById(id);
+            return true;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        //return !(this.itinerarioRepository.existsById(id));
+
+    }
+
+
 }

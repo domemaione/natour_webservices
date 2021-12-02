@@ -11,19 +11,13 @@ import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("itinerario") //tutte le api che implemento avranno sull'indirizzo il nome che metto su request mapping
 public class ItinerarioController {
     @Autowired
-    IItinerarioService itinerarioService;
+    private IItinerarioService itinerarioService;
 
     @GetMapping(value="/all", produces = "application/json") //l'id sarà visualizzato nell'url (produces = jso significa che il tipo di ritorno è un json)
     public ResponseEntity<List<ItinerarioDTO>> getAllItinerari() { 
@@ -33,6 +27,11 @@ public class ItinerarioController {
     @GetMapping(value="/get/{id}", produces = "application/json") //l'id sarà visualizzato nell'url (produces = jso significa che il tipo di ritorno è un json)
     public ResponseEntity<ItinerarioDTO> getItinerario(@PathVariable long id) {
         return ResponseEntity.ok(itinerarioService.getById(id));
+    }
+
+    @DeleteMapping(value="/delete/{id}", produces = "application/json") //l'id sarà visualizzato nell'url (produces = jso significa che il tipo di ritorno è un json)
+    public ResponseEntity<Boolean> deleteItinerario(@PathVariable long id) {
+        return ResponseEntity.ok(itinerarioService.deleteItinerarioById(id));
     }
 
     @PostMapping(value="/add", produces = "application/json")
