@@ -68,10 +68,14 @@ public class ItinerarioService implements IItinerarioService{ //questa è l'impl
     }
 
     @Override
-    public CoordinataDTO addCoordinata(CoordinataDTO coordinata) {
+    public CoordinataDTO addCoordinata(CoordinataDTO coordinata, long idItinerario) {
+        Optional<Itinerario> itinerario = this.itinerarioRepository.findById(idItinerario);
+        if(itinerario.isPresent()){
+            coordinata.setItinerario(itinerario.get());
+            return coordinataMapper.toDto(this.coordinataRepository.save(coordinataMapper.toModel(coordinata)));
+        }
+       else
+           return null;
 
-       return coordinataMapper.toDto(this.coordinataRepository.save(coordinataMapper.toModel(coordinata)));
     }
-
-
 }

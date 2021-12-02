@@ -26,9 +26,57 @@ public class Coordinata {
     private Date createdAt;
 
     @ManyToOne
-    @JoinColumn(name="itinerarioId",
-            insertable=false, updatable=false,
-            nullable=false)
+    @JoinColumn(name="itinerario_id", nullable=false)
     private Itinerario itinerario;
 
+    public Coordinata(){}
+
+
+    public Coordinata(long id, Double lat, Double lon, Date createdAt, Itinerario itinerario) {
+        this.id = id;
+        this.lat = lat;
+        this.lon = lon;
+        this.createdAt = createdAt;
+        this.itinerario = itinerario;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Double getLat() {
+        return lat;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public Double getLon() {
+        return lon;
+    }
+
+    public void setLon(Double lon) {
+        this.lon = lon;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Itinerario getItinerario() {
+        return itinerario;
+    }
+
+    public void setItinerario(Itinerario itinerario) {
+        this.itinerario = itinerario;
+    }
 }

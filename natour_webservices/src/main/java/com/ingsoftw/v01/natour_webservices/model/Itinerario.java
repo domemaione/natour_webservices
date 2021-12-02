@@ -1,15 +1,12 @@
 package com.ingsoftw.v01.natour_webservices.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.Range;
+
+import java.util.Set;
 
 
 @Entity
@@ -36,6 +33,10 @@ public class Itinerario {
     @Min(value=0)
     @Max(value=5)
     private Float punteggio;
+
+
+    @OneToMany(mappedBy="itinerario")
+    private Set<Coordinata> coordinate;
 
     public Itinerario(){}
 

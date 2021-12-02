@@ -41,9 +41,9 @@ public class ItinerarioController {
     }
 
    //aggiungere una post con Add punto ad un determinato itinerario
-   @PostMapping(value="/addcoordinata", produces = "application/json")
-   public ResponseEntity<CoordinataDTO> addCoordinata(@RequestBody CoordinataDTO coordinata) {
-       return ResponseEntity.status(HttpStatus.OK).body(itinerarioService.addCoordinata(coordinata));
+   @PostMapping(value="/addcoordinata/{id}", produces = "application/json")
+   public ResponseEntity<CoordinataDTO> addCoordinata(@RequestBody CoordinataDTO coordinata, @PathVariable long id) {
+       return ResponseEntity.status(HttpStatus.OK).body(itinerarioService.addCoordinata(coordinata,id));
    }
 
 }

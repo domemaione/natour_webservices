@@ -12,8 +12,6 @@ public interface ItinerarioMapper {
 
     ItinerarioDTO toDto(Itinerario itinerario);
     Itinerario toModel(ItinerarioDTO itinerarioDTO);
-
-
     List<ItinerarioDTO> toDtos(List<Itinerario> itinerarioList);
     List<Itinerario> toModels(List<ItinerarioDTO> itinerarioDTOList);
     

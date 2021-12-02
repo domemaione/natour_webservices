@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-12-02T18:23:42+0100",
+    date = "2021-12-02T22:42:48+0100",
     comments = "version: 1.4.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.3.jar, environment: Java 11.0.8 (AdoptOpenJDK)"
 )
 @Component
@@ -29,6 +29,12 @@ public class CoordinataMapperImpl implements CoordinataMapper {
         Date createdAt = null;
         Itinerario itinerario = null;
 
+        id = coordinata.getId();
+        lat = coordinata.getLat();
+        lon = coordinata.getLon();
+        createdAt = coordinata.getCreatedAt();
+        itinerario = coordinata.getItinerario();
+
         CoordinataDTO coordinataDTO = new CoordinataDTO( id, lat, lon, createdAt, itinerario );
 
         return coordinataDTO;
@@ -41,6 +47,12 @@ public class CoordinataMapperImpl implements CoordinataMapper {
         }
 
         Coordinata coordinata = new Coordinata();
+
+        coordinata.setId( coordinataDTO.getId() );
+        coordinata.setLat( coordinataDTO.getLat() );
+        coordinata.setLon( coordinataDTO.getLon() );
+        coordinata.setCreatedAt( coordinataDTO.getCreatedAt() );
+        coordinata.setItinerario( coordinataDTO.getItinerario() );
 
         return coordinata;
     }
