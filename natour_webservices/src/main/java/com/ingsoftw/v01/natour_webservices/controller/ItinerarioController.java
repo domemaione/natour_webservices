@@ -2,6 +2,7 @@ package com.ingsoftw.v01.natour_webservices.controller;
 
 import java.util.List;
 
+import com.ingsoftw.v01.natour_webservices.dto.CoordinataDTO;
 import com.ingsoftw.v01.natour_webservices.dto.ItinerarioDTO;
 import com.ingsoftw.v01.natour_webservices.model.Itinerario;
 import com.ingsoftw.v01.natour_webservices.service.IItinerarioService;
@@ -39,7 +40,11 @@ public class ItinerarioController {
         return ResponseEntity.status(HttpStatus.OK).body(itinerarioService.addItinerario(itinerario));
     }
 
-
+   //aggiungere una post con Add punto ad un determinato itinerario
+   @PostMapping(value="/addcoordinata", produces = "application/json")
+   public ResponseEntity<CoordinataDTO> addCoordinata(@RequestBody CoordinataDTO coordinata) {
+       return ResponseEntity.status(HttpStatus.OK).body(itinerarioService.addCoordinata(coordinata));
+   }
 
 }
 

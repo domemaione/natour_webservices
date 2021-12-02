@@ -7,8 +7,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "PERCORSI")
-public class Percorso {
+@Table(name = "COORDINATE")
+public class Coordinata {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //id autogenerante - primary key

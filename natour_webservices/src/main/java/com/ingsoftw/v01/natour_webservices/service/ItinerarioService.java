@@ -3,9 +3,12 @@ package com.ingsoftw.v01.natour_webservices.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.ingsoftw.v01.natour_webservices.dto.CoordinataDTO;
 import com.ingsoftw.v01.natour_webservices.dto.ItinerarioDTO;
+import com.ingsoftw.v01.natour_webservices.mapper.CoordinataMapper;
 import com.ingsoftw.v01.natour_webservices.mapper.ItinerarioMapper;
 import com.ingsoftw.v01.natour_webservices.model.Itinerario;
+import com.ingsoftw.v01.natour_webservices.repository.CoordinataRepository;
 import com.ingsoftw.v01.natour_webservices.repository.ItinerarioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +20,13 @@ public class ItinerarioService implements IItinerarioService{ //questa è l'impl
     private ItinerarioRepository itinerarioRepository;
 
     @Autowired
+    private CoordinataRepository coordinataRepository;
+
+    @Autowired
     private ItinerarioMapper itinerarioMapper;
+
+    @Autowired
+    private CoordinataMapper coordinataMapper;
 
     @Override
     public List<ItinerarioDTO> getAll() {
@@ -56,6 +65,12 @@ public class ItinerarioService implements IItinerarioService{ //questa è l'impl
         }
         //return !(this.itinerarioRepository.existsById(id));
 
+    }
+
+    @Override
+    public CoordinataDTO addCoordinata(CoordinataDTO coordinata) {
+
+       return coordinataMapper.toDto(this.coordinataRepository.save(coordinataMapper.toModel(coordinata)));
     }
 
 
