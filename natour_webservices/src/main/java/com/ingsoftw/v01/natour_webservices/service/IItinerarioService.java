@@ -14,7 +14,7 @@ public interface IItinerarioService { //
     ItinerarioDTO getById(Long id);
     ItinerarioDTO addItinerario(ItinerarioDTO itinerario);
     boolean deleteItinerarioById(Long id);
-    CoordinataDTO addCoordinata(CoordinataDTO coordinata,long idItinerario);
+    boolean addCoordinata(CoordinataDTO coordinata,long idItinerario);
 }
 
 

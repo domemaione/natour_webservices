@@ -1,5 +1,6 @@
 package com.ingsoftw.v01.natour_webservices.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ingsoftw.v01.natour_webservices.model.Itinerario;
 
 import java.util.Date;

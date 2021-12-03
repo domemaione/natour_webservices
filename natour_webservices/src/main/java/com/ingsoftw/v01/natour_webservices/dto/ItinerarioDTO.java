@@ -1,6 +1,10 @@
 package com.ingsoftw.v01.natour_webservices.dto;
 
 
+import com.ingsoftw.v01.natour_webservices.model.Coordinata;
+
+import java.util.Set;
+
 public class ItinerarioDTO {
 
     private long id;
@@ -8,7 +12,27 @@ public class ItinerarioDTO {
     private Integer durata;
     private Integer difficolta;
     private Float punteggio;
-    
+    private Set<Coordinata> coordinate;
+
+    public ItinerarioDTO() {}
+
+    public ItinerarioDTO(long id, String nome, Integer durata, Integer difficolta, Float punteggio, Set<Coordinata> coordinate) {
+        this.id = id;
+        this.nome = nome;
+        this.durata = durata;
+        this.difficolta = difficolta;
+        this.punteggio = punteggio;
+        this.coordinate = coordinate;
+    }
+
+    public Set<Coordinata> getCoordinate(){
+        return coordinate;
+    }
+
+    public void setCoordinate(Set<Coordinata> coordinate) {
+        this.coordinate = coordinate;
+    }
+
     public long getId() {
         return id;
     }
