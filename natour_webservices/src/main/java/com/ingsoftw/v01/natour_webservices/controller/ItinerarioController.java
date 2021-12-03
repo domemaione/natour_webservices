@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ingsoftw.v01.natour_webservices.dto.CoordinataDTO;
 import com.ingsoftw.v01.natour_webservices.dto.ItinerarioDTO;
+import com.ingsoftw.v01.natour_webservices.dto.JsonResponseDto;
 import com.ingsoftw.v01.natour_webservices.model.Itinerario;
 import com.ingsoftw.v01.natour_webservices.service.IItinerarioService;
 import com.ingsoftw.v01.natour_webservices.service.ItinerarioService;
@@ -21,8 +22,12 @@ public class ItinerarioController {
     private IItinerarioService itinerarioService;
 
     @GetMapping(value="/all", produces = "application/json") //l'id sarà visualizzato nell'url (produces = jso significa che il tipo di ritorno è un json)
-    public ResponseEntity<List<ItinerarioDTO>> getAllItinerari() { 
-        return ResponseEntity.status(HttpStatus.OK).body(itinerarioService.getAll()); //200(OK) Richiesta andata a buon fine
+    public ResponseEntity<JsonResponseDto <List<ItinerarioDTO>>> getAllItinerari() throws Exception {
+
+        JsonResponseDto <List<ItinerarioDTO>> body = new JsonResponseDto<>(JsonResponseDto.SUCCESS,HttpStatus.OK.value(),itinerarioService.getAll());
+
+        return ResponseEntity.ok(body); //200(OK) Richiesta andata a buon fine
+
     }
     
     @GetMapping(value="/get/{id}", produces = "application/json") //l'id sarà visualizzato nell'url (produces = jso significa che il tipo di ritorno è un json)
