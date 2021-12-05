@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ingsoftw.v01.natour_webservices.dto.CoordinataDTO;
 import com.ingsoftw.v01.natour_webservices.dto.ItinerarioDTO;
+import com.ingsoftw.v01.natour_webservices.dto.JsonResponseDto;
 import com.ingsoftw.v01.natour_webservices.model.Itinerario;
 import com.ingsoftw.v01.natour_webservices.service.IItinerarioService;
 import com.ingsoftw.v01.natour_webservices.service.ItinerarioService;
@@ -24,8 +25,12 @@ public class ItinerarioController {
 
     @ApiOperation("Restituisce l'elenco completo degli itinerari")
     @GetMapping(value="/all", produces = "application/json") //l'id sarà visualizzato nell'url (produces = jso significa che il tipo di ritorno è un json)
-    public ResponseEntity<List<ItinerarioDTO>> getAllItinerari() { 
-        return ResponseEntity.status(HttpStatus.OK).body(itinerarioService.getAll()); //200(OK) Richiesta andata a buon fine
+    public ResponseEntity<JsonResponseDto <List<ItinerarioDTO>>> getAllItinerari() throws Exception {
+
+        JsonResponseDto <List<ItinerarioDTO>> body = new JsonResponseDto<>(JsonResponseDto.SUCCESS,HttpStatus.OK.value(),itinerarioService.getAll());
+
+        return ResponseEntity.ok(body); //200(OK) Richiesta andata a buon fine
+
     }
 
     @ApiOperation("Restituisce l'itinerario in base all'id inserito in input")
@@ -46,7 +51,7 @@ public class ItinerarioController {
 
    //aggiungere una post con Add punto ad un determinato itinerario
    @PostMapping(value="/addcoordinata/{id}", produces = "application/json")
-   public ResponseEntity<CoordinataDTO> addCoordinata(@RequestBody CoordinataDTO coordinata, @PathVariable long id) {
+   public ResponseEntity<Boolean> addCoordinata(@RequestBody CoordinataDTO coordinata, @PathVariable long id) {
        return ResponseEntity.status(HttpStatus.OK).body(itinerarioService.addCoordinata(coordinata,id));
    }
 

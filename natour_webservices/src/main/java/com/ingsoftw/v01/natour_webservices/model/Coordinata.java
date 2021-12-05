@@ -1,6 +1,7 @@
 package com.ingsoftw.v01.natour_webservices.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ public class Coordinata {
 
     @ManyToOne
     @JoinColumn(name="itinerario_id", nullable=false)
+    @JsonIgnore
     private Itinerario itinerario;
 
     public Coordinata(){}
