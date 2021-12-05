@@ -8,6 +8,8 @@ import com.ingsoftw.v01.natour_webservices.model.Itinerario;
 import com.ingsoftw.v01.natour_webservices.service.IItinerarioService;
 import com.ingsoftw.v01.natour_webservices.service.ItinerarioService;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,13 +22,15 @@ public class ItinerarioController {
     @Autowired
     private IItinerarioService itinerarioService;
 
+    @ApiOperation("Restituisce l'elenco completo degli itinerari")
     @GetMapping(value="/all", produces = "application/json") //l'id sarà visualizzato nell'url (produces = jso significa che il tipo di ritorno è un json)
     public ResponseEntity<List<ItinerarioDTO>> getAllItinerari() { 
         return ResponseEntity.status(HttpStatus.OK).body(itinerarioService.getAll()); //200(OK) Richiesta andata a buon fine
     }
-    
+
+    @ApiOperation("Restituisce l'itinerario in base all'id inserito in input")
     @GetMapping(value="/get/{id}", produces = "application/json") //l'id sarà visualizzato nell'url (produces = jso significa che il tipo di ritorno è un json)
-    public ResponseEntity<ItinerarioDTO> getItinerario(@PathVariable long id) {
+    public ResponseEntity<ItinerarioDTO> getItinerario(@ApiParam("itinerarioId") @PathVariable long id) {
         return ResponseEntity.ok(itinerarioService.getById(id));
     }
 
