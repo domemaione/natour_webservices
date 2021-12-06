@@ -11,13 +11,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-<<<<<<< HEAD
-    date = "2021-12-06T11:12:32+0100",
+    date = "2021-12-06T11:41:13+0100",
     comments = "version: 1.4.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.3.jar, environment: Java 16.0.2 (Azul Systems, Inc.)"
-=======
-    date = "2021-12-05T19:47:15+0100",
-    comments = "version: 1.4.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.3.jar, environment: Java 11.0.8 (AdoptOpenJDK)"
->>>>>>> 91b2fe7e9982010364ac76236fc05cabdc802b4a
 )
 @Component
 public class CoordinataMapperImpl implements CoordinataMapper {
