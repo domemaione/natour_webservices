@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/natour_webservices.iml" filepath="$PROJECT_DIR$/.idea/natour_webservices.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/natour_webservices.main.iml" filepath="$PROJECT_DIR$/.idea/modules/natour_webservices.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/natour_webservices.test.iml" filepath="$PROJECT_DIR$/.idea/modules/natour_webservices.test.iml" />
     </modules>
   </component>
 </project>
