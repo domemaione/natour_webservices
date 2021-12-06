@@ -1,6 +1,6 @@
 package com.ingsoftw.v01.natour_webservices.mapper;
 
-import com.ingsoftw.v01.natour_webservices.dto.ItinerarioDTO;
+import com.ingsoftw.v01.natour_webservices.dto.ItinerarioDto;
 import com.ingsoftw.v01.natour_webservices.model.Coordinata;
 import com.ingsoftw.v01.natour_webservices.model.Itinerario;
 import java.util.ArrayList;
@@ -12,47 +12,47 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-12-03T12:42:50+0100",
+    date = "2021-12-06T11:12:32+0100",
     comments = "version: 1.4.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.3.jar, environment: Java 16.0.2 (Azul Systems, Inc.)"
 )
 @Component
 public class ItinerarioMapperImpl implements ItinerarioMapper {
 
     @Override
-    public ItinerarioDTO toDto(Itinerario itinerario) {
+    public ItinerarioDto toDto(Itinerario itinerario) {
         if ( itinerario == null ) {
             return null;
         }
 
-        ItinerarioDTO itinerarioDTO = new ItinerarioDTO();
+        ItinerarioDto itinerarioDto = new ItinerarioDto();
 
         Set<Coordinata> set = itinerario.getCoordinate();
         if ( set != null ) {
-            itinerarioDTO.setCoordinate( new HashSet<Coordinata>( set ) );
+            itinerarioDto.setCoordinate( new HashSet<Coordinata>( set ) );
         }
-        itinerarioDTO.setId( itinerario.getId() );
-        itinerarioDTO.setNome( itinerario.getNome() );
-        itinerarioDTO.setDurata( itinerario.getDurata() );
-        itinerarioDTO.setDifficolta( itinerario.getDifficolta() );
-        itinerarioDTO.setPunteggio( itinerario.getPunteggio() );
+        itinerarioDto.setId( itinerario.getId() );
+        itinerarioDto.setNome( itinerario.getNome() );
+        itinerarioDto.setDurata( itinerario.getDurata() );
+        itinerarioDto.setDifficolta( itinerario.getDifficolta() );
+        itinerarioDto.setPunteggio( itinerario.getPunteggio() );
 
-        return itinerarioDTO;
+        return itinerarioDto;
     }
 
     @Override
-    public Itinerario toModel(ItinerarioDTO itinerarioDTO) {
-        if ( itinerarioDTO == null ) {
+    public Itinerario toModel(ItinerarioDto itinerarioDto) {
+        if ( itinerarioDto == null ) {
             return null;
         }
 
         Itinerario itinerario = new Itinerario();
 
-        itinerario.setId( itinerarioDTO.getId() );
-        itinerario.setNome( itinerarioDTO.getNome() );
-        itinerario.setDurata( itinerarioDTO.getDurata() );
-        itinerario.setDifficolta( itinerarioDTO.getDifficolta() );
-        itinerario.setPunteggio( itinerarioDTO.getPunteggio() );
-        Set<Coordinata> set = itinerarioDTO.getCoordinate();
+        itinerario.setId( itinerarioDto.getId() );
+        itinerario.setNome( itinerarioDto.getNome() );
+        itinerario.setDurata( itinerarioDto.getDurata() );
+        itinerario.setDifficolta( itinerarioDto.getDifficolta() );
+        itinerario.setPunteggio( itinerarioDto.getPunteggio() );
+        Set<Coordinata> set = itinerarioDto.getCoordinate();
         if ( set != null ) {
             itinerario.setCoordinate( new HashSet<Coordinata>( set ) );
         }
@@ -61,12 +61,12 @@ public class ItinerarioMapperImpl implements ItinerarioMapper {
     }
 
     @Override
-    public List<ItinerarioDTO> toDtos(List<Itinerario> itinerarioList) {
+    public List<ItinerarioDto> toDtos(List<Itinerario> itinerarioList) {
         if ( itinerarioList == null ) {
             return null;
         }
 
-        List<ItinerarioDTO> list = new ArrayList<ItinerarioDTO>( itinerarioList.size() );
+        List<ItinerarioDto> list = new ArrayList<ItinerarioDto>( itinerarioList.size() );
         for ( Itinerario itinerario : itinerarioList ) {
             list.add( toDto( itinerario ) );
         }
@@ -75,14 +75,14 @@ public class ItinerarioMapperImpl implements ItinerarioMapper {
     }
 
     @Override
-    public List<Itinerario> toModels(List<ItinerarioDTO> itinerarioDTOList) {
-        if ( itinerarioDTOList == null ) {
+    public List<Itinerario> toModels(List<ItinerarioDto> itinerarioDtoList) {
+        if ( itinerarioDtoList == null ) {
             return null;
         }
 
-        List<Itinerario> list = new ArrayList<Itinerario>( itinerarioDTOList.size() );
-        for ( ItinerarioDTO itinerarioDTO : itinerarioDTOList ) {
-            list.add( toModel( itinerarioDTO ) );
+        List<Itinerario> list = new ArrayList<Itinerario>( itinerarioDtoList.size() );
+        for ( ItinerarioDto itinerarioDto : itinerarioDtoList ) {
+            list.add( toModel( itinerarioDto ) );
         }
 
         return list;

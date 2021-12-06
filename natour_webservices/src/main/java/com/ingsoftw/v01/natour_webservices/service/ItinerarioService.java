@@ -3,8 +3,8 @@ package com.ingsoftw.v01.natour_webservices.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.ingsoftw.v01.natour_webservices.dto.CoordinataDTO;
-import com.ingsoftw.v01.natour_webservices.dto.ItinerarioDTO;
+import com.ingsoftw.v01.natour_webservices.dto.CoordinataDto;
+import com.ingsoftw.v01.natour_webservices.dto.ItinerarioDto;
 import com.ingsoftw.v01.natour_webservices.mapper.CoordinataMapper;
 import com.ingsoftw.v01.natour_webservices.mapper.ItinerarioMapper;
 import com.ingsoftw.v01.natour_webservices.model.Itinerario;
@@ -29,13 +29,13 @@ public class ItinerarioService implements IItinerarioService{ //questa è l'impl
     private CoordinataMapper coordinataMapper;
 
     @Override
-    public List<ItinerarioDTO> getAll() {
+    public List<ItinerarioDto> getAll() {
         List<Itinerario> itinerariList = itinerarioRepository.findAll();
         return itinerarioMapper.toDtos(itinerariList);
     }
 
     @Override
-    public ItinerarioDTO getById(Long id) {
+    public ItinerarioDto getById(Long id) {
 
         Optional<Itinerario> itinerario=itinerarioRepository.findById(id);
         if(itinerario.isPresent())
@@ -47,7 +47,7 @@ public class ItinerarioService implements IItinerarioService{ //questa è l'impl
 
 
     @Override
-    public ItinerarioDTO addItinerario(ItinerarioDTO itinerario) {
+    public ItinerarioDto addItinerario(ItinerarioDto itinerario) {
         
         return itinerarioMapper.toDto(itinerarioRepository.save(itinerarioMapper.toModel(itinerario))); //prende questo oggetto e lo mette nel db
     }
@@ -68,7 +68,7 @@ public class ItinerarioService implements IItinerarioService{ //questa è l'impl
     }
 
     @Override
-    public boolean addCoordinata(CoordinataDTO coordinata, long idItinerario) {
+    public boolean addCoordinata(CoordinataDto coordinata, long idItinerario) {
         Optional<Itinerario> itinerario = this.itinerarioRepository.findById(idItinerario);
         if(itinerario.isPresent()){
             coordinata.setItinerario(itinerario.get());

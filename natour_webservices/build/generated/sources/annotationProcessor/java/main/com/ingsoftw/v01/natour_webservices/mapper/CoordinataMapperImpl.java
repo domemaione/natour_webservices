@@ -1,6 +1,6 @@
 package com.ingsoftw.v01.natour_webservices.mapper;
 
-import com.ingsoftw.v01.natour_webservices.dto.CoordinataDTO;
+import com.ingsoftw.v01.natour_webservices.dto.CoordinataDto;
 import com.ingsoftw.v01.natour_webservices.model.Coordinata;
 import com.ingsoftw.v01.natour_webservices.model.Itinerario;
 import java.util.ArrayList;
@@ -11,14 +11,14 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-12-03T12:42:50+0100",
+    date = "2021-12-06T11:12:32+0100",
     comments = "version: 1.4.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.3.jar, environment: Java 16.0.2 (Azul Systems, Inc.)"
 )
 @Component
 public class CoordinataMapperImpl implements CoordinataMapper {
 
     @Override
-    public CoordinataDTO toDto(Coordinata coordinata) {
+    public CoordinataDto toDto(Coordinata coordinata) {
         if ( coordinata == null ) {
             return null;
         }
@@ -35,13 +35,13 @@ public class CoordinataMapperImpl implements CoordinataMapper {
         createdAt = coordinata.getCreatedAt();
         itinerario = coordinata.getItinerario();
 
-        CoordinataDTO coordinataDTO = new CoordinataDTO( id, lat, lon, createdAt, itinerario );
+        CoordinataDto coordinataDto = new CoordinataDto( id, lat, lon, createdAt, itinerario );
 
-        return coordinataDTO;
+        return coordinataDto;
     }
 
     @Override
-    public Coordinata toModel(CoordinataDTO coordinataDTO) {
+    public Coordinata toModel(CoordinataDto coordinataDTO) {
         if ( coordinataDTO == null ) {
             return null;
         }
@@ -58,12 +58,12 @@ public class CoordinataMapperImpl implements CoordinataMapper {
     }
 
     @Override
-    public List<CoordinataDTO> toDtos(List<Coordinata> coordinataList) {
+    public List<CoordinataDto> toDtos(List<Coordinata> coordinataList) {
         if ( coordinataList == null ) {
             return null;
         }
 
-        List<CoordinataDTO> list = new ArrayList<CoordinataDTO>( coordinataList.size() );
+        List<CoordinataDto> list = new ArrayList<CoordinataDto>( coordinataList.size() );
         for ( Coordinata coordinata : coordinataList ) {
             list.add( toDto( coordinata ) );
         }
@@ -72,14 +72,14 @@ public class CoordinataMapperImpl implements CoordinataMapper {
     }
 
     @Override
-    public List<Coordinata> toModels(List<CoordinataDTO> coordinataDTOList) {
+    public List<Coordinata> toModels(List<CoordinataDto> coordinataDTOList) {
         if ( coordinataDTOList == null ) {
             return null;
         }
 
         List<Coordinata> list = new ArrayList<Coordinata>( coordinataDTOList.size() );
-        for ( CoordinataDTO coordinataDTO : coordinataDTOList ) {
-            list.add( toModel( coordinataDTO ) );
+        for ( CoordinataDto coordinataDto : coordinataDTOList ) {
+            list.add( toModel( coordinataDto ) );
         }
 
         return list;

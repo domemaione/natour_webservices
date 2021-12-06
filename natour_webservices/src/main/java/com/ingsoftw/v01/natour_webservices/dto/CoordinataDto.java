@@ -5,14 +5,14 @@ import com.ingsoftw.v01.natour_webservices.model.Itinerario;
 
 import java.util.Date;
 
-public class CoordinataDTO {
+public class CoordinataDto {
     private long id;
     private Double lat;
     private Double lon;
     private Date createdAt;
     private Itinerario itinerario;
 
-    public CoordinataDTO(long id, Double lat, Double lon, Date createdAt, Itinerario itinerario) {
+    public CoordinataDto(long id, Double lat, Double lon, Date createdAt, Itinerario itinerario) {
         this.id = id;
         this.lat = lat;
         this.lon = lon;

@@ -36,7 +36,8 @@ public class Itinerario {
 
 
     //OneToMay annotazione uno a molti
-    @OneToMany(mappedBy="itinerario")
+    //@OneToMany(mappedBy="itinerario")
+    @OneToMany(mappedBy = "itinerario", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Set<Coordinata> coordinate;
 
     public Itinerario(){}

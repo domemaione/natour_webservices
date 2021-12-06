@@ -1,7 +1,7 @@
 package com.ingsoftw.v01.natour_webservices.dto;
 import java.sql.Date;
 
-public class UtenteDTO {
+public class UtenteDto {
     
     private long id;
     private String email;
