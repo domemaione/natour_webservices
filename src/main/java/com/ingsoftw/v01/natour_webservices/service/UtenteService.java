@@ -3,6 +3,7 @@ package com.ingsoftw.v01.natour_webservices.service;
 import com.ingsoftw.v01.natour_webservices.dto.CoordinataDto;
 import com.ingsoftw.v01.natour_webservices.dto.UtenteDto;
 import com.ingsoftw.v01.natour_webservices.dto.UtenteDto;
+import com.ingsoftw.v01.natour_webservices.exception.EmailException;
 import com.ingsoftw.v01.natour_webservices.mapper.UtenteMapper;
 import com.ingsoftw.v01.natour_webservices.model.Utente;
 import com.ingsoftw.v01.natour_webservices.model.Utente;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 @Service
 public class UtenteService implements IUtenteService{
@@ -40,9 +42,20 @@ public class UtenteService implements IUtenteService{
 
     }
 
+    public static boolean patternMatches(String emailAddress, String regexPattern) {
+        return Pattern.compile(regexPattern)
+                .matcher(emailAddress)
+                .matches();
+    }
+
 
     @Override
     public UtenteDto addUtente(UtenteDto utente) {
+
+        String regexPattern = "^(.+)@(\\S+)$";
+        String email = utente.getEmail(); //prendiamo l'email dell'utente che abbiamo passato da utenteController
+        if(!patternMatches(email, regexPattern))
+            throw new EmailException("email non valida");
 
         return utenteMapper.toDto(utenteRepository.save(utenteMapper.toModel(utente))); //prende questo oggetto e lo mette nel db
     }

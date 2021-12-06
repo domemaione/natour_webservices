@@ -32,9 +32,10 @@ public class UtenteController {
 
     @ApiOperation("Restituisce l'utente in base all'id inserito in input")
     @GetMapping(value="/get/{id}", produces = "application/json") //l'id sarà visualizzato nell'url (produces = jso significa che il tipo di ritorno è un json)
-    public ResponseEntity<UtenteDto> getUtente(@ApiParam("utenteId") @PathVariable long id) {
+    public ResponseEntity<JsonResponseDto <UtenteDto>> getUtente(@ApiParam("utenteId") @PathVariable long id) {
 
-        return ResponseEntity.ok(utenteService.getById(id));
+        JsonResponseDto <UtenteDto> body = new JsonResponseDto<>(JsonResponseDto.SUCCESS,HttpStatus.OK.value(),utenteService.getById(id));
+        return ResponseEntity.ok(body);
     }
 
     @ApiOperation("Cancella l'utente in base all'id inserito in input")
@@ -52,8 +53,10 @@ public class UtenteController {
 
     @ApiOperation("Aggiunge un utente con id auto-incremento")
     @PostMapping(value="/add", produces = "application/json")
-    public ResponseEntity<UtenteDto> addUtente(@RequestBody UtenteDto utente) {
-        return ResponseEntity.status(HttpStatus.OK).body(utenteService.addUtente(utente));
+    public ResponseEntity<JsonResponseDto <UtenteDto>> addUtente(@RequestBody UtenteDto utente) {
+
+        JsonResponseDto <UtenteDto> body = new JsonResponseDto<>(JsonResponseDto.SUCCESS,HttpStatus.OK.value(),utenteService.addUtente(utente));
+        return ResponseEntity.ok(body);
     }
 
     
