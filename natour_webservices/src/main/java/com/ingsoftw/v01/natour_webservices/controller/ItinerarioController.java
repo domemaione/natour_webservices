@@ -39,21 +39,23 @@ public class ItinerarioController {
         return ResponseEntity.ok(itinerarioService.getById(id));
     }
 
+    @ApiOperation("Cancella l'itinerario in base all'id inserito in input")
     @DeleteMapping(value="/delete/{id}", produces = "application/json") //l'id sarà visualizzato nell'url (produces = jso significa che il tipo di ritorno è un json)
-    public ResponseEntity<Boolean> deleteItinerario(@PathVariable long id) {
+    public ResponseEntity<Boolean> deleteItinerario(@ApiParam("itinerarioId") @PathVariable long id) {
         return ResponseEntity.ok(itinerarioService.deleteItinerarioById(id));
     }
 
+    @ApiOperation("Aggiunge un itinerario con id auto-incremento")
     @PostMapping(value="/add", produces = "application/json")
     public ResponseEntity<ItinerarioDTO> addItinerario(@RequestBody ItinerarioDTO itinerario) { 
         return ResponseEntity.status(HttpStatus.OK).body(itinerarioService.addItinerario(itinerario));
     }
 
-   //aggiungere una post con Add punto ad un determinato itinerario
-   @PostMapping(value="/addcoordinata/{id}", produces = "application/json")
-   public ResponseEntity<Boolean> addCoordinata(@RequestBody CoordinataDTO coordinata, @PathVariable long id) {
+    @ApiOperation("Aggiunge una coordinata ad un determinato itinerario preso in input tramite id")
+    @PostMapping(value="/addcoordinata/{id}", produces = "application/json")
+    public ResponseEntity<Boolean> addCoordinata(@ApiParam("itinerarioId") @RequestBody CoordinataDTO coordinata, @PathVariable long id) {
        return ResponseEntity.status(HttpStatus.OK).body(itinerarioService.addCoordinata(coordinata,id));
-   }
+    }
 
 }
 
