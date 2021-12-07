@@ -2,6 +2,7 @@ package com.ingsoftw.v01.natour_webservices.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ingsoftw.v01.natour_webservices.model.Itinerario;
+import lombok.*;
 
 import java.util.Date;
 
@@ -12,6 +13,9 @@ public class CoordinataDto {
     private Date createdAt;
     private Itinerario itinerario;
 
+    public CoordinataDto() {
+    }
+
     public CoordinataDto(long id, Double lat, Double lon, Date createdAt, Itinerario itinerario) {
         this.id = id;
         this.lat = lat;
@@ -19,6 +23,7 @@ public class CoordinataDto {
         this.createdAt = createdAt;
         this.itinerario = itinerario;
     }
+
 
     public long getId() {
         return id;

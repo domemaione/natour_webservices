@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 import org.hibernate.validator.constraints.Range;
 
 import java.util.Set;
@@ -34,20 +36,23 @@ public class Itinerario {
     @Max(value=5)
     private Float punteggio;
 
+    @ManyToOne
+    @JoinColumn(name="utente_id", nullable=false)
+    @JsonIgnore //ignora i campi dell'oggetto interno di un altro oggetto
+    private Utente utente;
 
-    //OneToMay annotazione uno a molti
-    //@OneToMany(mappedBy="itinerario")
     @OneToMany(mappedBy = "itinerario", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Set<Coordinata> coordinate;
 
-    public Itinerario(){}
+    public Itinerario() {}
 
-    public Itinerario(long id, String nome, Integer durata, Integer difficolta, Float punteggio, Set<Coordinata> coordinate) {
+    public Itinerario(long id, String nome, Integer durata, Integer difficolta, Float punteggio, Utente utente, Set<Coordinata> coordinate) {
         this.id = id;
         this.nome = nome;
         this.durata = durata;
         this.difficolta = difficolta;
         this.punteggio = punteggio;
+        this.utente = utente;
         this.coordinate = coordinate;
     }
 
@@ -89,6 +94,14 @@ public class Itinerario {
 
     public void setPunteggio(Float punteggio) {
         this.punteggio = punteggio;
+    }
+
+    public Utente getUtente() {
+        return utente;
+    }
+
+    public void setUtente(Utente utente) {
+        this.utente = utente;
     }
 
     public Set<Coordinata> getCoordinate() {

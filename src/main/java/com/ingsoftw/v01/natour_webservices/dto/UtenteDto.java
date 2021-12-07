@@ -1,5 +1,10 @@
 package com.ingsoftw.v01.natour_webservices.dto;
+import com.ingsoftw.v01.natour_webservices.model.Itinerario;
+import lombok.*;
+
 import java.sql.Date;
+import java.util.Set;
+
 
 public class UtenteDto {
     
@@ -8,7 +13,19 @@ public class UtenteDto {
     private String password;
     private String nomeCompleto;
     private Date data;
+    private Set<Itinerario> itinerari;
 
+    public UtenteDto() {
+    }
+
+    public UtenteDto(long id, String email, String password, String nomeCompleto, Date data, Set<Itinerario> itinerari) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.nomeCompleto = nomeCompleto;
+        this.data = data;
+        this.itinerari = itinerari;
+    }
 
     public long getId() {
         return id;
@@ -50,7 +67,11 @@ public class UtenteDto {
         this.data = data;
     }
 
+    public Set<Itinerario> getItinerari() {
+        return itinerari;
+    }
 
-
-
+    public void setItinerari(Set<Itinerario> itinerari) {
+        this.itinerari = itinerari;
+    }
 }

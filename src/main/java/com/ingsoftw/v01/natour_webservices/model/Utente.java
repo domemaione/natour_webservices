@@ -1,8 +1,11 @@
 package com.ingsoftw.v01.natour_webservices.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+
 import javax.persistence.*;
 import java.sql.Date;
-
+import java.util.Set;
 
 
 @Entity
@@ -25,14 +28,20 @@ public class Utente {
     @Column(name="dataNascita")
     private Date data;
 
-    public Utente (){}
 
-    public Utente(long id, String email, String password, String nomeCompleto, Date data) {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "utente")  //lazy ti carica questo set solo quando lo richiedi
+    @JsonIgnore //ignora l'ogetto interno in fase di visualizzazione
+    private Set<Itinerario> itinerari;
+
+    public Utente() {}
+
+    public Utente(long id, String email, String password, String nomeCompleto, Date data, Set<Itinerario> itinerari) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.nomeCompleto = nomeCompleto;
         this.data = data;
+        this.itinerari = itinerari;
     }
 
     public long getId() {
@@ -75,10 +84,11 @@ public class Utente {
         this.data = data;
     }
 
-    
+    public Set<Itinerario> getItinerari() {
+        return itinerari;
+    }
 
-    
-
-   
-
+    public void setItinerari(Set<Itinerario> itinerari) {
+        this.itinerari = itinerari;
+    }
 }

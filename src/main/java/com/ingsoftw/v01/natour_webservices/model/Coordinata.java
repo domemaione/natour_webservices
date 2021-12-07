@@ -2,6 +2,7 @@ package com.ingsoftw.v01.natour_webservices.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -31,8 +32,7 @@ public class Coordinata {
     @JsonIgnore
     private Itinerario itinerario;
 
-    public Coordinata(){}
-
+    public Coordinata() {}
 
     public Coordinata(long id, Double lat, Double lon, Date createdAt, Itinerario itinerario) {
         this.id = id;
