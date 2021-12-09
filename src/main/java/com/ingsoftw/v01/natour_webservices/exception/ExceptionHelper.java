@@ -33,5 +33,15 @@ public class ExceptionHelper {
         return new ResponseEntity<Object>(errorMessage,new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR); //restituisce il messaggio al client
     }
 
+    @ExceptionHandler(value = {AuthenticationException.class}) //spring gestisce le eccezioni dell'email
+    public ResponseEntity<Object> handleAuthenticationException(Exception ex){
+
+        ex.printStackTrace();
+        String errorMessageDescription = ex.getLocalizedMessage() == null? ex.toString(): ex.getLocalizedMessage(); //ex è l'oggetto eccezione
+        ErrorMessage errorMessage = new ErrorMessage(new Date(),errorMessageDescription,ex.getClass().toString());
+
+        return new ResponseEntity<Object>(errorMessage,new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR); //restituisce il messaggio al client
+    }
+
 
 }
