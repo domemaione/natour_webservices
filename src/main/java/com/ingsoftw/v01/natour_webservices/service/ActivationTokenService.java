@@ -8,6 +8,8 @@ import com.ingsoftw.v01.natour_webservices.repository.ActivationTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.UUID;
 
 @Service
@@ -27,6 +29,13 @@ public class ActivationTokenService implements IActivationTokenService {
        activationToken.setToken(token);
        activationToken.setUtente(utente);
        activationTokenRepository.save(activationToken); //metto nel db il token
+
+       //Qui vado a dare un tempo di validità del token
+       //private Timestamp calculateExpiryDate(int expiryTimeInMinutes){
+          // Calendar cal = Calendar.getInstance();
+         //  cal.add(Calendar.MINUTE,expiryTimeInMinutes);
+         //  return new Timestamp(cal.getTime().getTime());
+       //}
 
        //emailService.sendEmail(token);
        return activationToken;

@@ -37,6 +37,9 @@ public class AuthenticationService implements IAuthenticationService{
     @Autowired
     private ActivationTokenService activationTokenService;
 
+    @Autowired
+    private ActivationTokenRepository activationTokenRepository;
+
 
 
     @Override
@@ -51,10 +54,16 @@ public class AuthenticationService implements IAuthenticationService{
         if(opt.isPresent())
             throw new AuthenticationException("utente già registrato");
 
-        Utente utente_registrato = utenteRepository.save(utenteMapper.toModel(utente));
-        ActivationToken activationToken = activationTokenService.saveToken(utente_registrato);
 
-        return utente;
+        ActivationToken activationToken = new ActivationToken();
+        String token = UUID.randomUUID().toString();
+        activationToken.setToken(token);
+        activationToken.setUtente(utenteMapper.toModel(utente));
+
+       // Utente utente_registrato = utenteRepository.save(utenteMapper.toModel(utente));
+       // ActivationToken activationToken = activationTokenService.saveToken(utente_registrato);
+        Utente utenteNew = activationTokenRepository.save(activationToken).getUtente();
+        return utenteMapper.toDto(utenteNew);
     }
 
 
