@@ -3,13 +3,10 @@ package com.ingsoftw.v01.natour_webservices.service;
 import com.ingsoftw.v01.natour_webservices.dto.UtenteDto;
 import com.ingsoftw.v01.natour_webservices.exception.AuthenticationException;
 import com.ingsoftw.v01.natour_webservices.exception.EmailException;
-import com.ingsoftw.v01.natour_webservices.mapper.ActivationTokenMapper;
-import com.ingsoftw.v01.natour_webservices.mapper.ItinerarioMapper;
 import com.ingsoftw.v01.natour_webservices.mapper.UtenteMapper;
 import com.ingsoftw.v01.natour_webservices.model.ActivationToken;
 import com.ingsoftw.v01.natour_webservices.model.Utente;
 import com.ingsoftw.v01.natour_webservices.repository.ActivationTokenRepository;
-import com.ingsoftw.v01.natour_webservices.repository.CoordinataRepository;
 import com.ingsoftw.v01.natour_webservices.repository.UtenteRepository;
 import com.ingsoftw.v01.natour_webservices.utils.Validation;
 import io.jsonwebtoken.Jwts;
@@ -25,7 +22,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+//import java.sql.Date;
 
 @Service
 public class AuthenticationService implements IAuthenticationService{
@@ -35,9 +34,6 @@ public class AuthenticationService implements IAuthenticationService{
 
     @Autowired
     private UtenteMapper utenteMapper;
-
-    @Autowired
-    private ActivationTokenService activationTokenService;
 
     @Autowired
     private EmailService emailService;
@@ -62,6 +58,7 @@ public class AuthenticationService implements IAuthenticationService{
         ActivationToken activationToken = new ActivationToken();
         String token = UUID.randomUUID().toString();
         activationToken.setToken(token);
+        activationToken.setActivationDate(new Date());
         activationToken.setUtente(utenteMapper.toModel(utente));
         emailService.sendEmailWithAttachment(activationToken);
 
@@ -75,9 +72,14 @@ public class AuthenticationService implements IAuthenticationService{
     public UtenteDto attivaUtente(String token) {
 
         Optional<ActivationToken> opt = activationTokenRepository.findByToken(token);
+        Date firstDate = new Date();
+        Date secondDate = opt.get().getActivationDate();
+        long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
+        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
 
-        if(opt.isEmpty())
+        if(opt.isEmpty() || diff > 0)
             throw new AuthenticationException("token non valido");
+
 
         Utente utente = opt.get().getUtente();
         utente.setEnable(true);

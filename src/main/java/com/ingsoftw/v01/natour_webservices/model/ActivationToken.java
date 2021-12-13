@@ -3,7 +3,8 @@ package com.ingsoftw.v01.natour_webservices.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
+
 
 @Entity
 @Table(name = "ACTIVATION_TOKEN")
@@ -15,8 +16,8 @@ public class ActivationToken {
     @Column(name="TOKEN")
     private String token;
 
-    @Column(name="expiry_date")
-    private Timestamp expiryDate;
+    @Column(name="activation_date")
+    private Date activationDate;
 
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="utente_id")
@@ -25,9 +26,10 @@ public class ActivationToken {
 
     public ActivationToken() {}
 
-    public ActivationToken(long id, String token, Utente utente) {
+    public ActivationToken(long id, String token, Date activationDate, Utente utente) {
         this.id = id;
         this.token = token;
+        this.activationDate = activationDate;
         this.utente = utente;
     }
 
@@ -47,12 +49,12 @@ public class ActivationToken {
         this.token = token;
     }
 
-    public Timestamp getExpiryDate() {
-        return expiryDate;
+    public Date getActivationDate() {
+        return activationDate;
     }
 
-    public void setExpiryDate(Timestamp expiryDate) {
-        this.expiryDate = expiryDate;
+    public void setActivationDate(Date activationDate) {
+        this.activationDate = activationDate;
     }
 
     public Utente getUtente() {
