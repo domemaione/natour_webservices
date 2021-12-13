@@ -12,5 +12,5 @@ public interface CoordinataMapper {
     Coordinata toModel(CoordinataDto coordinataDTO);
 
     List<CoordinataDto> toDtos(List<Coordinata> coordinataList);
-    List<Coordinata> toModels(List<CoordinataDto> coordinataDTOList);
+    List<Coordinata> toModels(List<CoordinataDto> coordinataDtoList);
 }

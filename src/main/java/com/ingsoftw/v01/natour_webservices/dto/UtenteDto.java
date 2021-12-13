@@ -1,4 +1,5 @@
 package com.ingsoftw.v01.natour_webservices.dto;
+import com.ingsoftw.v01.natour_webservices.model.ActivationToken;
 import com.ingsoftw.v01.natour_webservices.model.Itinerario;
 import lombok.*;
 
@@ -15,8 +16,7 @@ public class UtenteDto {
     private Date data;
     private Set<Itinerario> itinerari;
 
-    public UtenteDto() {
-    }
+    public UtenteDto() {}
 
     public UtenteDto(long id, String email, String password, String nomeCompleto, Date data, Set<Itinerario> itinerari) {
         this.id = id;

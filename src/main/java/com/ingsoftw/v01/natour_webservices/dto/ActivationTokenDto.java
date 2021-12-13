@@ -1,26 +1,16 @@
-package com.ingsoftw.v01.natour_webservices.model;
+package com.ingsoftw.v01.natour_webservices.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ingsoftw.v01.natour_webservices.model.Utente;
 
-import javax.persistence.*;
+public class ActivationTokenDto {
 
-@Entity
-@Table(name = "ACTIVATION_TOKEN")
-public class ActivationToken {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //id autogenerante - primary key
     private long id;
-
-    @Column(name="TOKEN")
     private String token;
-
-    @OneToOne
-    @JsonIgnore
     private Utente utente;
 
-    public ActivationToken() {}
+    public ActivationTokenDto() {}
 
-    public ActivationToken(long id, String token, Utente utente) {
+    public ActivationTokenDto(long id, String token, Utente utente) {
         this.id = id;
         this.token = token;
         this.utente = utente;

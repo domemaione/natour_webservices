@@ -28,6 +28,9 @@ public class Utente {
     @Column(name="dataNascita")
     private Date data;
 
+    @OneToOne(mappedBy = "utente", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private ActivationToken activationToken;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "utente")  //lazy ti carica questo set solo quando lo richiedi
     @JsonIgnore //ignora l'ogetto interno in fase di visualizzazione
@@ -35,12 +38,13 @@ public class Utente {
 
     public Utente() {}
 
-    public Utente(long id, String email, String password, String nomeCompleto, Date data, Set<Itinerario> itinerari) {
+    public Utente(long id, String email, String password, String nomeCompleto, Date data, ActivationToken activationToken, Set<Itinerario> itinerari) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.nomeCompleto = nomeCompleto;
         this.data = data;
+        this.activationToken = activationToken;
         this.itinerari = itinerari;
     }
 
@@ -82,6 +86,14 @@ public class Utente {
 
     public void setData(Date data) {
         this.data = data;
+    }
+
+    public ActivationToken getActivationToken() {
+        return activationToken;
+    }
+
+    public void setActivationToken(ActivationToken activationToken) {
+        this.activationToken = activationToken;
     }
 
     public Set<Itinerario> getItinerari() {
