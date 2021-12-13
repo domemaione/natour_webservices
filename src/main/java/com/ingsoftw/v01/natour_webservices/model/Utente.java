@@ -26,7 +26,10 @@ public class Utente {
     private String nomeCompleto;
 
     @Column(name="dataNascita")
-    private Date data;
+    private Date dataNascita;
+
+    @Column(name="enable")
+    private boolean enable = false;
 
     //@OneToOne(mappedBy = "utente", cascade = CascadeType.ALL)
    // @JsonIgnore
@@ -38,12 +41,13 @@ public class Utente {
 
     public Utente() {}
 
-    public Utente(long id, String email, String password, String nomeCompleto, Date data, Set<Itinerario> itinerari) {
+    public Utente(long id, String email, String password, String nomeCompleto, Date dataNascita, boolean enable, Set<Itinerario> itinerari) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.nomeCompleto = nomeCompleto;
-        this.data = data;
+        this.dataNascita = dataNascita;
+        this.enable = enable;
         this.itinerari = itinerari;
     }
 
@@ -79,21 +83,21 @@ public class Utente {
         this.nomeCompleto = nomeCompleto;
     }
 
-    public Date getData() {
-        return data;
+    public Date getDataNascita() {
+        return dataNascita;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setDataNascita(Date dataNascita) {
+        this.dataNascita = dataNascita;
     }
 
-    /*public ActivationToken getActivationToken() {
-        return activationToken;
+    public boolean isEnable() {
+        return enable;
     }
 
-    public void setActivationToken(ActivationToken activationToken) {
-        this.activationToken = activationToken;
-    }*/
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
 
     public Set<Itinerario> getItinerari() {
         return itinerari;

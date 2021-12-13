@@ -13,10 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -40,12 +37,24 @@ public class AuthenticationController {
 
     }
 
+    @ApiOperation("Login utente")
     @PostMapping("/login")
     public String login() {
 
         String token = authenticationService.getJWTToken();
 
         return token;
+
+    }
+
+    @ApiOperation("Abilita utente") //descrizione swagger dell'endpoint
+    @GetMapping(value="/activation/{token}", produces = "application/json") //l'id sarà visualizzato nell'url (produces = jso significa che il tipo di ritorno è un json)
+    public ResponseEntity<JsonResponseDto<UtenteDto>> activationUser(
+            @ApiParam("token") @PathVariable String token) throws Exception {
+
+        JsonResponseDto <UtenteDto> body = new JsonResponseDto<UtenteDto>(JsonResponseDto.SUCCESS, HttpStatus.OK.value(),authenticationService.attivaUtente(token));
+
+        return ResponseEntity.ok(body); //200(OK) Richiesta andata a buon fine
 
     }
 

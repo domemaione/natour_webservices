@@ -13,17 +13,19 @@ public class UtenteDto {
     private String email;
     private String password;
     private String nomeCompleto;
-    private Date data;
+    private Date dataNascita;
+    private boolean enable;
     private Set<Itinerario> itinerari;
 
     public UtenteDto() {}
 
-    public UtenteDto(long id, String email, String password, String nomeCompleto, Date data, Set<Itinerario> itinerari) {
+    public UtenteDto(long id, String email, String password, String nomeCompleto, Date dataNascita, boolean enable, Set<Itinerario> itinerari) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.nomeCompleto = nomeCompleto;
-        this.data = data;
+        this.dataNascita = dataNascita;
+        this.enable = enable;
         this.itinerari = itinerari;
     }
 
@@ -59,12 +61,20 @@ public class UtenteDto {
         this.nomeCompleto = nomeCompleto;
     }
 
-    public Date getData() {
-        return data;
+    public Date getDataNascita() {
+        return dataNascita;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setDataNascita(Date dataNascita) {
+        this.dataNascita = dataNascita;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
     }
 
     public Set<Itinerario> getItinerari() {

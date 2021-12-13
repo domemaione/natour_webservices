@@ -19,6 +19,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -38,12 +40,14 @@ public class AuthenticationService implements IAuthenticationService{
     private ActivationTokenService activationTokenService;
 
     @Autowired
+    private EmailService emailService;
+
+    @Autowired
     private ActivationTokenRepository activationTokenRepository;
 
 
-
     @Override
-    public UtenteDto registrazione(UtenteDto utente){
+    public UtenteDto registrazione(UtenteDto utente) throws MessagingException, IOException {
 
         if(!Validation.patternMatches(utente.getEmail(), Validation.regexPattern))
             throw new EmailException("email non valida");
@@ -59,11 +63,28 @@ public class AuthenticationService implements IAuthenticationService{
         String token = UUID.randomUUID().toString();
         activationToken.setToken(token);
         activationToken.setUtente(utenteMapper.toModel(utente));
+        emailService.sendEmailWithAttachment(activationToken);
 
        // Utente utente_registrato = utenteRepository.save(utenteMapper.toModel(utente));
        // ActivationToken activationToken = activationTokenService.saveToken(utente_registrato);
         Utente utenteNew = activationTokenRepository.save(activationToken).getUtente();
         return utenteMapper.toDto(utenteNew);
+    }
+
+    @Override
+    public UtenteDto attivaUtente(String token) {
+
+        Optional<ActivationToken> opt = activationTokenRepository.findByToken(token);
+
+        if(opt.isEmpty())
+            throw new AuthenticationException("token non valido");
+
+        Utente utente = opt.get().getUtente();
+        utente.setEnable(true);
+        activationTokenRepository.delete(opt.get());
+       utenteRepository.save(utente);
+
+        return null;
     }
 
 
@@ -87,4 +108,7 @@ public class AuthenticationService implements IAuthenticationService{
 
         return "Bearer " + token;
     }
+
+
+
 }
