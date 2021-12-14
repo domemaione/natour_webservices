@@ -1,21 +1,16 @@
 package com.ingsoftw.v01.natour_webservices.service;
 
-import com.ingsoftw.v01.natour_webservices.dto.CoordinataDto;
-import com.ingsoftw.v01.natour_webservices.dto.UtenteDto;
 import com.ingsoftw.v01.natour_webservices.dto.UtenteDto;
 import com.ingsoftw.v01.natour_webservices.exception.EmailException;
 import com.ingsoftw.v01.natour_webservices.mapper.UtenteMapper;
 import com.ingsoftw.v01.natour_webservices.model.Utente;
-import com.ingsoftw.v01.natour_webservices.model.Utente;
 import com.ingsoftw.v01.natour_webservices.repository.UtenteRepository;
-import com.ingsoftw.v01.natour_webservices.repository.UtenteRepository;
-import com.ingsoftw.v01.natour_webservices.utils.Validation;
+import com.ingsoftw.v01.natour_webservices.utils.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.regex.Pattern;
 
 
 @Service
@@ -51,7 +46,7 @@ public class UtenteService implements IUtenteService{
     public UtenteDto addUtente(UtenteDto utente) {
 
         String email = utente.getEmail(); //prendiamo l'email dell'utente che abbiamo passato da utenteController
-        if(!Validation.patternMatches(email, Validation.regexPattern))
+        if(!EmailValidator.patternMatches(email, EmailValidator.regexPattern))
             throw new EmailException("email non valida");
 
         return utenteMapper.toDto(utenteRepository.save(utenteMapper.toModel(utente))); //prende questo oggetto e lo mette nel db

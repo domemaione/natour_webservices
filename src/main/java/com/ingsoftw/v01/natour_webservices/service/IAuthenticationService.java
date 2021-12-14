@@ -10,5 +10,6 @@ public interface IAuthenticationService {
 
     public UtenteDto registrazione(UtenteDto utente) throws MessagingException, IOException;
     public UtenteDto attivaUtente(String token);
+    public UtenteDto login(UtenteDto utente);
     public String getJWTToken();
 }

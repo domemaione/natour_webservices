@@ -2,7 +2,7 @@ package com.ingsoftw.v01.natour_webservices.utils;
 
 import java.util.regex.Pattern;
 
-public class Validation {
+public class EmailValidator {
 
     public final static String regexPattern = "^(.+)@(\\S+)$";
 

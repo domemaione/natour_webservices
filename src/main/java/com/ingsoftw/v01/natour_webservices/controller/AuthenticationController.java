@@ -38,13 +38,13 @@ public class AuthenticationController {
     }
 
     @ApiOperation("Login utente")
-    @PostMapping("/login")
-    public String login() {
+    @PostMapping(value="/login", produces = "application/json") //l'id sarà visualizzato nell'url (produces = jso significa che il tipo di ritorno è un json)
+    public ResponseEntity<JsonResponseDto<UtenteDto>> loginUser(
+            @ApiParam("utente") @RequestBody UtenteDto utente) throws Exception {
 
-        String token = authenticationService.getJWTToken();
+        JsonResponseDto <UtenteDto> body = new JsonResponseDto<UtenteDto>(JsonResponseDto.SUCCESS, HttpStatus.OK.value(),authenticationService.login(utente));
 
-        return token;
-
+        return ResponseEntity.ok(body); //200(OK) Richiesta andata a buon fine
     }
 
     @ApiOperation("Abilita utente") //descrizione swagger dell'endpoint

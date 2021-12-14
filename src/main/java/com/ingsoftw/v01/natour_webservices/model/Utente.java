@@ -1,6 +1,7 @@
 package com.ingsoftw.v01.natour_webservices.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ingsoftw.v01.natour_webservices.utils.ValidPassword;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ public class Utente {
     private String email;
 
     @Column(name="password")
+    @ValidPassword
     private String password;
 
     @Column(name="nomeCompleto")

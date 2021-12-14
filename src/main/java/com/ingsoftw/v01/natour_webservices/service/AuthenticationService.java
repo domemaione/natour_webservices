@@ -8,7 +8,7 @@ import com.ingsoftw.v01.natour_webservices.model.ActivationToken;
 import com.ingsoftw.v01.natour_webservices.model.Utente;
 import com.ingsoftw.v01.natour_webservices.repository.ActivationTokenRepository;
 import com.ingsoftw.v01.natour_webservices.repository.UtenteRepository;
-import com.ingsoftw.v01.natour_webservices.utils.Validation;
+import com.ingsoftw.v01.natour_webservices.utils.EmailValidator;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +45,7 @@ public class AuthenticationService implements IAuthenticationService{
     @Override
     public UtenteDto registrazione(UtenteDto utente) throws MessagingException, IOException {
 
-        if(!Validation.patternMatches(utente.getEmail(), Validation.regexPattern))
+        if(!EmailValidator.patternMatches(utente.getEmail(), EmailValidator.regexPattern))
             throw new EmailException("email non valida");
 
         Optional<Utente> opt = utenteRepository.findByEmail(utente.getEmail());
@@ -72,14 +72,17 @@ public class AuthenticationService implements IAuthenticationService{
     public UtenteDto attivaUtente(String token) {
 
         Optional<ActivationToken> opt = activationTokenRepository.findByToken(token);
+
+        if(opt.isEmpty())
+            throw new AuthenticationException("token non valido");
+
         Date firstDate = new Date();
         Date secondDate = opt.get().getActivationDate();
         long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
         long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
 
-        if(opt.isEmpty() || diff > 0)
-            throw new AuthenticationException("token non valido");
-
+        if(diff > 0)
+            throw new AuthenticationException("token scaduto");
 
         Utente utente = opt.get().getUtente();
         utente.setEnable(true);
@@ -87,6 +90,21 @@ public class AuthenticationService implements IAuthenticationService{
        utenteRepository.save(utente);
 
         return null;
+    }
+
+    @Override
+    public UtenteDto login(UtenteDto utente) {
+        Optional<Utente> opt = utenteRepository.findByEmail(utente.getEmail()); //nel db restituisce sempre una model quindi il ritorno è un Utente
+
+        if(opt.isEmpty())
+            throw new AuthenticationException("Utente non registrato");
+        Utente utenteRegistrato = opt.get(); //opt.get restituisce l'utente
+        if(!utenteRegistrato.isEnable())
+            throw new AuthenticationException("Utente non attivo");
+        if(!utente.getPassword().equals(utenteRegistrato.getPassword())) //se la passw non corrisponde
+            throw new AuthenticationException("Password non valida");
+
+        return utenteMapper.toDto(utenteRegistrato);
     }
 
 
