@@ -27,7 +27,7 @@ public class ExceptionHelper {
     }
 
     @ExceptionHandler(value = {EmailException.class}) //spring gestisce le eccezioni dell'email
-    public ResponseEntity<Object> handleEmailException(Exception ex){
+    public ResponseEntity<Object> handleEmailException(EmailException ex){
 
         ex.printStackTrace();
         String errorMessageDescription = ex.getLocalizedMessage() == null? ex.toString(): ex.getLocalizedMessage(); //ex è l'oggetto eccezione
@@ -37,7 +37,7 @@ public class ExceptionHelper {
     }
 
     @ExceptionHandler(value = {AuthenticationException.class}) //spring gestisce le eccezioni dell'email
-    public ResponseEntity<Object> handleAuthenticationException(Exception ex){
+    public ResponseEntity<Object> handleAuthenticationException(AuthenticationException ex){
 
         ex.printStackTrace();
         String errorMessageDescription = ex.getLocalizedMessage() == null? ex.toString(): ex.getLocalizedMessage(); //ex è l'oggetto eccezione

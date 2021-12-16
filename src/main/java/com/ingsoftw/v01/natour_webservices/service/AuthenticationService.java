@@ -103,8 +103,11 @@ public class AuthenticationService implements IAuthenticationService{
             throw new AuthenticationException("Utente non attivo");
         if(!utente.getPassword().equals(utenteRegistrato.getPassword())) //se la passw non corrisponde
             throw new AuthenticationException("Password non valida");
-
-        return utenteMapper.toDto(utenteRegistrato);
+        
+        String token = UUID.randomUUID().toString();
+        utenteRegistrato.setToken(token); //salvo il token in utenteregistrato che si è loggato
+        utenteRepository.save(utenteRegistrato); //aggiorno nel db l'utenteRegistrato con il suo token
+        return utenteMapper.toDto(utenteRegistrato); //restituisco l'utenteRegistrato di tipo UtenteDto (tramite il mapper)
     }
 
 
