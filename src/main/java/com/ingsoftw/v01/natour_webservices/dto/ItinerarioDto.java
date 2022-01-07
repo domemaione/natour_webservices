@@ -11,16 +11,16 @@ public class ItinerarioDto {
 
     private long id;
     private String nome;
-    private Integer durata;
-    private Integer difficolta;
-    private Float punteggio;
+    private Double durata;
+    private Double difficolta;
+    private Double punteggio;
     private Set<Coordinata> coordinate;
     private Utente utente;
 
     public ItinerarioDto() {
     }
 
-    public ItinerarioDto(long id, String nome, Integer durata, Integer difficolta, Float punteggio, Set<Coordinata> coordinate, Utente utente) {
+    public ItinerarioDto(long id, String nome, Double durata, Double difficolta, Double punteggio, Set<Coordinata> coordinate, Utente utente) {
         this.id = id;
         this.nome = nome;
         this.durata = durata;
@@ -46,27 +46,27 @@ public class ItinerarioDto {
         this.nome = nome;
     }
 
-    public Integer getDurata() {
+    public Double getDurata() {
         return durata;
     }
 
-    public void setDurata(Integer durata) {
+    public void setDurata(Double durata) {
         this.durata = durata;
     }
 
-    public Integer getDifficolta() {
+    public Double getDifficolta() {
         return difficolta;
     }
 
-    public void setDifficolta(Integer difficolta) {
+    public void setDifficolta(Double difficolta) {
         this.difficolta = difficolta;
     }
 
-    public Float getPunteggio() {
+    public Double getPunteggio() {
         return punteggio;
     }
 
-    public void setPunteggio(Float punteggio) {
+    public void setPunteggio(Double punteggio) {
         this.punteggio = punteggio;
     }
 

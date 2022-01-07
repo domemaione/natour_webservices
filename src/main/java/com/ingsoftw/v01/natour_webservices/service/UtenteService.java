@@ -43,7 +43,7 @@ public class UtenteService implements IUtenteService{
 
 
     @Override
-    public UtenteDto addUtente(UtenteDto utente) {
+    public UtenteDto addUtente(UtenteDto utente) throws EmailException {
 
         String email = utente.getEmail(); //prendiamo l'email dell'utente che abbiamo passato da utenteController
         if(!EmailValidator.patternMatches(email, EmailValidator.regexPattern))

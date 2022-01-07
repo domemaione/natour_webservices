@@ -32,7 +32,7 @@ public class UtenteController {
 
     @ApiOperation("Restituisce l'utente in base all'id inserito in input")
     @GetMapping(value="/get/{id}", produces = "application/json") //l'id sarà visualizzato nell'url (produces = jso significa che il tipo di ritorno è un json)
-    public ResponseEntity<JsonResponseDto <UtenteDto>> getUtente(@ApiParam("utenteId") @PathVariable long id) {
+    public ResponseEntity<JsonResponseDto <UtenteDto>> getUtente(@ApiParam("utenteId") @PathVariable long id) throws Exception {
 
         JsonResponseDto <UtenteDto> body = new JsonResponseDto<>(JsonResponseDto.SUCCESS,HttpStatus.OK.value(),utenteService.getById(id));
         return ResponseEntity.ok(body);
@@ -41,7 +41,7 @@ public class UtenteController {
     @ApiOperation("Cancella l'utente in base all'id inserito in input")
     @DeleteMapping(value="/delete/{id}", produces = "application/json") //l'id sarà visualizzato nell'url (produces = jso significa che il tipo di ritorno è un json)
 
-    public ResponseEntity<JsonResponseDto <List<UtenteDto>>> deleteUtente(@ApiParam("utenteId") @PathVariable long id) {
+    public ResponseEntity<JsonResponseDto <List<UtenteDto>>> deleteUtente(@ApiParam("utenteId") @PathVariable long id) throws Exception {
 
         boolean flag = utenteService.deleteUtenteById(id);
         String message = flag ? " utente cancellato" : " utente non è stato cancellato";
@@ -53,7 +53,7 @@ public class UtenteController {
 
     @ApiOperation("Aggiunge un utente con id auto-incremento")
     @PostMapping(value="/add", produces = "application/json")
-    public ResponseEntity<JsonResponseDto <UtenteDto>> addUtente(@RequestBody UtenteDto utente) {
+    public ResponseEntity<JsonResponseDto <UtenteDto>> addUtente(@RequestBody UtenteDto utente) throws Exception {
 
         JsonResponseDto <UtenteDto> body = new JsonResponseDto<>(JsonResponseDto.SUCCESS,HttpStatus.OK.value(),utenteService.addUtente(utente));
         return ResponseEntity.ok(body);

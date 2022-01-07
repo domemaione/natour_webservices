@@ -5,5 +5,5 @@ import com.ingsoftw.v01.natour_webservices.model.Utente;
 
 public interface IActivationTokenService {
 
-    public ActivationToken saveToken(Utente utente);
+    public ActivationToken saveToken(Utente utente) throws Exception;
 }

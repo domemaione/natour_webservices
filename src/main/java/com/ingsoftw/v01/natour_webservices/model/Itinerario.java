@@ -23,18 +23,19 @@ public class Itinerario {
     private String nome;
 
     @Column(name = "DURATA")
-    private Integer durata;
+    @Min(value=0)
+    private Double durata;
 
     @Column(name = "DIFFICOLTA")//toDo
     @Min(value=0)
     @Max(value=5)
   //  @Range(min= 0, max= 5)
-    private Integer difficolta;
+    private Double difficolta;
     
     @Column(name = "PUNTEGGIO") //toDo
     @Min(value=0)
     @Max(value=5)
-    private Float punteggio;
+    private Double punteggio;
 
     @ManyToOne
     @JoinColumn(name="utente_id", nullable=false)
@@ -46,7 +47,7 @@ public class Itinerario {
 
     public Itinerario() {}
 
-    public Itinerario(long id, String nome, Integer durata, Integer difficolta, Float punteggio, Utente utente, Set<Coordinata> coordinate) {
+    public Itinerario(long id, String nome, Double durata, Double difficolta, Double punteggio, Utente utente, Set<Coordinata> coordinate) {
         this.id = id;
         this.nome = nome;
         this.durata = durata;
@@ -72,27 +73,27 @@ public class Itinerario {
         this.nome = nome;
     }
 
-    public Integer getDurata() {
+    public Double getDurata() {
         return durata;
     }
 
-    public void setDurata(Integer durata) {
+    public void setDurata(Double durata) {
         this.durata = durata;
     }
 
-    public Integer getDifficolta() {
+    public Double getDifficolta() {
         return difficolta;
     }
 
-    public void setDifficolta(Integer difficolta) {
+    public void setDifficolta(Double difficolta) {
         this.difficolta = difficolta;
     }
 
-    public Float getPunteggio() {
+    public Double getPunteggio() {
         return punteggio;
     }
 
-    public void setPunteggio(Float punteggio) {
+    public void setPunteggio(Double punteggio) {
         this.punteggio = punteggio;
     }
 

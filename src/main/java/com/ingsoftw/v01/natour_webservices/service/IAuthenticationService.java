@@ -8,8 +8,8 @@ import java.io.IOException;
 
 public interface IAuthenticationService {
 
-    public UtenteDto registrazione(UtenteDto utente) throws MessagingException, IOException;
-    public UtenteDto attivaUtente(String token);
-    public UtenteDto login(UtenteDto utente);
-    public String getJWTToken();
+    public UtenteDto registrazione(UtenteDto utente) throws Exception;
+    public UtenteDto attivaUtente(String token) throws Exception;
+    public UtenteDto login(UtenteDto utente) throws Exception;
+    public String getJWTToken() throws Exception;
 }

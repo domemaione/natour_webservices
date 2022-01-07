@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.ingsoftw.v01.natour_webservices.dto.CoordinataDto;
 import com.ingsoftw.v01.natour_webservices.dto.ItinerarioDto;
+import com.ingsoftw.v01.natour_webservices.exception.ItininerarioException;
 import com.ingsoftw.v01.natour_webservices.mapper.CoordinataMapper;
 import com.ingsoftw.v01.natour_webservices.mapper.ItinerarioMapper;
 import com.ingsoftw.v01.natour_webservices.model.Itinerario;
@@ -30,12 +31,12 @@ public class ItinerarioService implements IItinerarioService{ //questa è l'impl
 
     @Override
     public List<ItinerarioDto> getAll() {
-        List<Itinerario> itinerariList = itinerarioRepository.findAll();
+        List<Itinerario> itinerariList = itinerarioRepository.findAll(); //findAll metodo di default della Repository
         return itinerarioMapper.toDtos(itinerariList);
     }
 
     @Override
-    public ItinerarioDto getById(Long id) {
+    public ItinerarioDto getById(Long id) throws Exception {
 
         Optional<Itinerario> itinerario=itinerarioRepository.findById(id);
         if(itinerario.isPresent())
@@ -47,7 +48,7 @@ public class ItinerarioService implements IItinerarioService{ //questa è l'impl
 
 
     @Override
-    public ItinerarioDto addItinerario(ItinerarioDto itinerario) {
+    public ItinerarioDto addItinerario(ItinerarioDto itinerario) throws Exception {
         
         return itinerarioMapper.toDto(itinerarioRepository.save(itinerarioMapper.toModel(itinerario))); //prende questo oggetto e lo mette nel db
     }
@@ -68,15 +69,26 @@ public class ItinerarioService implements IItinerarioService{ //questa è l'impl
     }
 
     @Override
-    public boolean addCoordinata(CoordinataDto coordinata, long idItinerario) {
-        Optional<Itinerario> itinerario = this.itinerarioRepository.findById(idItinerario);
-        if(itinerario.isPresent()){
-            coordinata.setItinerario(itinerario.get());
-            coordinataMapper.toDto(this.coordinataRepository.save(coordinataMapper.toModel(coordinata)));
-            return true;
-        }
-       else
-           return false;
+    public CoordinataDto addCoordinata(CoordinataDto coordinata, long itinerarioId) throws Exception{
+        Optional<Itinerario> itinerario = this.itinerarioRepository.findById(itinerarioId);
+        if(itinerario.isEmpty())
+            throw new ItininerarioException("Itinerario non trovato");
 
+        coordinata.setItinerario(itinerario.get());
+        CoordinataDto coordinataDto = coordinataMapper.toDto(this.coordinataRepository.save(coordinataMapper.toModel(coordinata)));
+        return coordinataDto;
     }
+
+    @Override
+    public ItinerarioDto addDifficolta(Integer difficolta, long itinerarioId) throws Exception {
+        Optional<Itinerario> itinerario = this.itinerarioRepository.findById(itinerarioId);
+
+        if(itinerario.isEmpty())
+            throw new ItininerarioException("Itinerario non trovato");
+
+        return null;
+    }
+
+
+
 }

@@ -43,7 +43,7 @@ public class AuthenticationService implements IAuthenticationService{
 
 
     @Override
-    public UtenteDto registrazione(UtenteDto utente) throws MessagingException, IOException {
+    public UtenteDto registrazione(UtenteDto utente) throws Exception {
 
         if(!EmailValidator.patternMatches(utente.getEmail(), EmailValidator.regexPattern))
             throw new EmailException("email non valida");
@@ -69,7 +69,7 @@ public class AuthenticationService implements IAuthenticationService{
     }
 
     @Override
-    public UtenteDto attivaUtente(String token) {
+    public UtenteDto attivaUtente(String token) throws Exception {
 
         Optional<ActivationToken> opt = activationTokenRepository.findByToken(token);
 
@@ -93,7 +93,7 @@ public class AuthenticationService implements IAuthenticationService{
     }
 
     @Override
-    public UtenteDto login(UtenteDto utente) {
+    public UtenteDto login(UtenteDto utente) throws Exception {
         Optional<Utente> opt = utenteRepository.findByEmail(utente.getEmail()); //nel db restituisce sempre una model quindi il ritorno è un Utente
 
         if(opt.isEmpty())
@@ -103,15 +103,17 @@ public class AuthenticationService implements IAuthenticationService{
             throw new AuthenticationException("Utente non attivo");
         if(!utente.getPassword().equals(utenteRegistrato.getPassword())) //se la passw non corrisponde
             throw new AuthenticationException("Password non valida");
-        
+
+        ActivationToken activationToken = new ActivationToken();
         String token = UUID.randomUUID().toString();
+        //Qui dovrei criptare il token
         utenteRegistrato.setToken(token); //salvo il token in utenteregistrato che si è loggato
         utenteRepository.save(utenteRegistrato); //aggiorno nel db l'utenteRegistrato con il suo token
         return utenteMapper.toDto(utenteRegistrato); //restituisco l'utenteRegistrato di tipo UtenteDto (tramite il mapper)
     }
 
-
-    public String getJWTToken() {
+    @Override
+    public String getJWTToken() throws Exception {
         String secretKey = "mySecretKey";
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
                 .commaSeparatedStringToAuthorityList("ROLE_USER");

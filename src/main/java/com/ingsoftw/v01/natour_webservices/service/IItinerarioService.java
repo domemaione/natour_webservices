@@ -9,11 +9,12 @@ import com.ingsoftw.v01.natour_webservices.dto.ItinerarioDto;
 
 public interface IItinerarioService { //
 
-    List<ItinerarioDto> getAll(); //metodo astratto senza corpo
-    ItinerarioDto getById(Long id);
-    ItinerarioDto addItinerario(ItinerarioDto itinerario);
-    boolean deleteItinerarioById(Long id);
-    boolean addCoordinata(CoordinataDto coordinata,long idItinerario);
+    List<ItinerarioDto> getAll() throws Exception; //metodo astratto senza corpo
+    ItinerarioDto getById(Long id) throws Exception;
+    ItinerarioDto addItinerario(ItinerarioDto itinerario) throws Exception;
+    boolean deleteItinerarioById(Long id) throws Exception;
+    CoordinataDto addCoordinata(CoordinataDto coordinata,long itinerarioId) throws Exception;
+    ItinerarioDto addDifficolta(Integer difficolta, long itinerarioId) throws Exception;
 }
 
 

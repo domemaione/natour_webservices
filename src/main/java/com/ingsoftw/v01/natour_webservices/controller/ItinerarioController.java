@@ -36,17 +36,17 @@ public class ItinerarioController {
 
     @ApiOperation("Restituisce l'itinerario in base all'id inserito in input")
     @GetMapping(value="/get/{id}", produces = "application/json") //l'id sarà visualizzato nell'url (produces = jso significa che il tipo di ritorno è un json)
-    public ResponseEntity<ItinerarioDto> getItinerario(@ApiParam("itinerarioId") @PathVariable long id) {
+    public ResponseEntity<ItinerarioDto> getItinerario(@ApiParam("itinerarioId") @PathVariable long itinerarioId) throws Exception {
 
-        return ResponseEntity.ok(itinerarioService.getById(id));
+        return ResponseEntity.ok(itinerarioService.getById(itinerarioId));
     }
 
     @ApiOperation("Cancella l'itinerario in base all'id inserito in input")
     @DeleteMapping(value="/delete/{id}", produces = "application/json") //l'id sarà visualizzato nell'url (produces = jso significa che il tipo di ritorno è un json)
 
-    public ResponseEntity<JsonResponseDto <List<ItinerarioDto>>> deleteItinerario(@ApiParam("itinerarioId") @PathVariable long id) {
+    public ResponseEntity<JsonResponseDto <List<ItinerarioDto>>> deleteItinerario(@ApiParam("itinerarioId") @PathVariable long itinerarioId) throws Exception {
 
-        boolean flag = itinerarioService.deleteItinerarioById(id);
+        boolean flag = itinerarioService.deleteItinerarioById(itinerarioId);
         String message = flag ? " itinerario cancellato" : " itinerario non è stato cancellato";
 
         JsonResponseDto <List<ItinerarioDto>> body = new JsonResponseDto<>(JsonResponseDto.SUCCESS + message,HttpStatus.OK.value(),itinerarioService.getAll());
@@ -56,7 +56,7 @@ public class ItinerarioController {
 
     @ApiOperation("Aggiunge un itinerario con id auto-incremento")
     @PostMapping(value="/add", produces = "application/json")
-    public ResponseEntity<ItinerarioDto> addItinerario(@RequestBody ItinerarioDto itinerario) {
+    public ResponseEntity<ItinerarioDto> addItinerario(@RequestBody ItinerarioDto itinerario) throws Exception {
         return ResponseEntity.status(HttpStatus.OK).body(itinerarioService.addItinerario(itinerario));
     }
 
@@ -64,8 +64,21 @@ public class ItinerarioController {
 
     @ApiOperation("Aggiunge una coordinata ad un determinato itinerario preso in input tramite id")
     @PostMapping(value="/addcoordinata/{id}", produces = "application/json")
-    public ResponseEntity<Boolean> addCoordinata(@ApiParam("itinerarioId") @RequestBody CoordinataDto coordinata, @PathVariable long id) {
-       return ResponseEntity.status(HttpStatus.OK).body(itinerarioService.addCoordinata(coordinata,id));
+    public ResponseEntity<CoordinataDto> addCoordinata(
+            @ApiParam("coordinata") @RequestBody CoordinataDto coordinata,
+            @ApiParam("itinerarioId") @PathVariable long itinerarioId) throws Exception {
+       return ResponseEntity.status(HttpStatus.OK).body(itinerarioService.addCoordinata(coordinata,itinerarioId));
+    }
+
+
+    //aggiungere in itinerario, la difficoltà di un utente e fare la media
+
+    @ApiOperation("Aggiunge la difficoltà ad un itinerario")
+    @PostMapping(value="/addDifficolta/{id}", produces = "application/json")
+    public ResponseEntity<ItinerarioDto> addDifficolta(
+            @ApiParam("difficolta") @RequestBody Integer difficolta,
+            @ApiParam("itinerarioId")  @PathVariable long itinerarioId ) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(itinerarioService.addDifficolta(difficolta,itinerarioId));
     }
 
 }
