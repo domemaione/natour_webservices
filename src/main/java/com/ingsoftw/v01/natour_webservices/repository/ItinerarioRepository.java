@@ -1,10 +1,6 @@
 package com.ingsoftw.v01.natour_webservices.repository;
 
-import java.util.List;
-
 import com.ingsoftw.v01.natour_webservices.model.Itinerario;
-
-import org.hibernate.annotations.ListIndexBase;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 //DAO

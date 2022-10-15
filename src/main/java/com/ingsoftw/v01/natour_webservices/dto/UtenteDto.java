@@ -1,42 +1,50 @@
 package com.ingsoftw.v01.natour_webservices.dto;
-import com.ingsoftw.v01.natour_webservices.model.ActivationToken;
-import com.ingsoftw.v01.natour_webservices.model.Itinerario;
-import lombok.*;
 
 import java.sql.Date;
-import java.util.Set;
-
 
 public class UtenteDto {
-    
-    private long id;
+    private Long idUser;
+    private String fullName;
+    private java.sql.Date birthDate;
     private String email;
     private String password;
-    private String nomeCompleto;
-    private Date dataNascita;
-    private boolean enable;
     private String token;
-    private Set<Itinerario> itinerari;
+    private boolean enable;
 
     public UtenteDto() {}
 
-    public UtenteDto(long id, String email, String password, String nomeCompleto, Date dataNascita, boolean enable, String token, Set<Itinerario> itinerari) {
-        this.id = id;
+    public UtenteDto(Long idUser, String fullName, Date birthDate, String email, String password, String token, boolean enable) {
+        this.idUser = idUser;
+        this.fullName = fullName;
+        this.birthDate = birthDate;
         this.email = email;
         this.password = password;
-        this.nomeCompleto = nomeCompleto;
-        this.dataNascita = dataNascita;
-        this.enable = enable;
         this.token = token;
-        this.itinerari = itinerari;
+        this.enable = enable;
     }
 
-    public long getId() {
-        return id;
+    public Long getIdUser() {
+        return idUser;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getEmail() {
@@ -55,30 +63,6 @@ public class UtenteDto {
         this.password = password;
     }
 
-    public String getNomeCompleto() {
-        return nomeCompleto;
-    }
-
-    public void setNomeCompleto(String nomeCompleto) {
-        this.nomeCompleto = nomeCompleto;
-    }
-
-    public Date getDataNascita() {
-        return dataNascita;
-    }
-
-    public void setDataNascita(Date dataNascita) {
-        this.dataNascita = dataNascita;
-    }
-
-    public boolean isEnable() {
-        return enable;
-    }
-
-    public void setEnable(boolean enable) {
-        this.enable = enable;
-    }
-
     public String getToken() {
         return token;
     }
@@ -87,11 +71,11 @@ public class UtenteDto {
         this.token = token;
     }
 
-    public Set<Itinerario> getItinerari() {
-        return itinerari;
+    public boolean isEnable() {
+        return enable;
     }
 
-    public void setItinerari(Set<Itinerario> itinerari) {
-        this.itinerari = itinerari;
+    public void setEnable(boolean enable) {
+        this.enable = enable;
     }
 }

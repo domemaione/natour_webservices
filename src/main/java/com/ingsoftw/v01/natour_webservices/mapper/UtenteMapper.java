@@ -1,8 +1,6 @@
 package com.ingsoftw.v01.natour_webservices.mapper;
 
-import com.ingsoftw.v01.natour_webservices.dto.ItinerarioDto;
 import com.ingsoftw.v01.natour_webservices.dto.UtenteDto;
-import com.ingsoftw.v01.natour_webservices.model.Itinerario;
 import com.ingsoftw.v01.natour_webservices.model.Utente;
 import org.mapstruct.Mapper;
 

@@ -1,9 +1,7 @@
 package com.ingsoftw.v01.natour_webservices.service;
 
 import com.ingsoftw.v01.natour_webservices.model.ActivationToken;
-import com.ingsoftw.v01.natour_webservices.model.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -25,8 +23,7 @@ public class EmailService {
         // true = multipart message
         MimeMessageHelper helper = new MimeMessageHelper(msg, true);
 
-        helper.setTo(token.getUtente().getEmail());
-
+        helper.setTo(token.getUser().getEmail());
         helper.setSubject("Activation Account Natour");
 
         // default = text/plain

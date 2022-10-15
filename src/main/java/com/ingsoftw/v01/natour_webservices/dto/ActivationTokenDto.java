@@ -2,31 +2,29 @@ package com.ingsoftw.v01.natour_webservices.dto;
 
 import com.ingsoftw.v01.natour_webservices.model.Utente;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class ActivationTokenDto {
-
-    private long id;
+    private Long idToken;
     private String token;
-    private Utente utente;
-    private Date activation_date;
+    private java.sql.Date activationDate;
+    private Utente user;
 
     public ActivationTokenDto() {}
 
-
-    public ActivationTokenDto(long id, String token, Utente utente, Date activation_date) {
-        this.id = id;
+    public ActivationTokenDto(Long idToken, String token, Date activationDate, Utente user) {
+        this.idToken = idToken;
         this.token = token;
-        this.utente = utente;
-        this.activation_date = activation_date;
+        this.activationDate = activationDate;
+        this.user = user;
     }
 
-    public long getId() {
-        return id;
+    public Long getIdToken() {
+        return idToken;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setIdToken(Long idToken) {
+        this.idToken = idToken;
     }
 
     public String getToken() {
@@ -37,19 +35,19 @@ public class ActivationTokenDto {
         this.token = token;
     }
 
-    public Utente getUtente() {
-        return utente;
+    public Date getActivationDate() {
+        return activationDate;
     }
 
-    public void setUtente(Utente utente) {
-        this.utente = utente;
+    public void setActivationDate(Date activationDate) {
+        this.activationDate = activationDate;
     }
 
-    public Date getActivation_date() {
-        return activation_date;
+    public Utente getUser() {
+        return user;
     }
 
-    public void setActivation_date(Date activation_date) {
-        this.activation_date = activation_date;
+    public void setUser(Utente user) {
+        this.user = user;
     }
 }

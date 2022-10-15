@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.ingsoftw.v01.natour_webservices.dto.ItinerarioDto;
 import com.ingsoftw.v01.natour_webservices.model.Itinerario;
-
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

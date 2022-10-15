@@ -1,43 +1,41 @@
 package com.ingsoftw.v01.natour_webservices.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
-
 @Entity
-@Table(name = "ACTIVATION_TOKEN")
+@Table(name = "activationToken")
 public class ActivationToken {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //id autogenerante - primary key
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_token", nullable = false)
+    private Long id;
 
-    @Column(name="TOKEN")
+    @Column(name = "token", nullable = false)
     private String token;
 
-    @Column(name="activation_date")
+    @Column(name = "activation_date", nullable = false)
     private Date activationDate;
 
     @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="utente_id")
-    @JsonIgnore
-    private Utente utente;
+    @JoinColumn(name = "id_user", nullable = false)
+    private Utente user;
 
     public ActivationToken() {}
 
-    public ActivationToken(long id, String token, Date activationDate, Utente utente) {
+    public ActivationToken(Long id, String token, Date activationDate, Utente user) {
         this.id = id;
         this.token = token;
         this.activationDate = activationDate;
-        this.utente = utente;
+        this.user = user;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -57,11 +55,11 @@ public class ActivationToken {
         this.activationDate = activationDate;
     }
 
-    public Utente getUtente() {
-        return utente;
+    public Utente getUser() {
+        return user;
     }
 
-    public void setUtente(Utente utente) {
-        this.utente = utente;
+    public void setUser(Utente user) {
+        this.user = user;
     }
 }

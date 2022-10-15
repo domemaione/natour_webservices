@@ -2,29 +2,20 @@ package com.ingsoftw.v01.natour_webservices.controller;
 
 import com.ingsoftw.v01.natour_webservices.dto.JsonResponseDto;
 import com.ingsoftw.v01.natour_webservices.dto.UtenteDto;
-import com.ingsoftw.v01.natour_webservices.model.Utente;
-import com.ingsoftw.v01.natour_webservices.service.IAuthenticationService;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.ingsoftw.v01.natour_webservices.service.AuthenticationService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("auth")
 public class AuthenticationController {
 
     @Autowired
-    private IAuthenticationService authenticationService;
+    private AuthenticationService authenticationService;
 
     @ApiOperation("Registra un utente") //descrizione swagger dell'endpoint
     @PostMapping(value="/registrazione", produces = "application/json") //l'id sarà visualizzato nell'url (produces = jso significa che il tipo di ritorno è un json)

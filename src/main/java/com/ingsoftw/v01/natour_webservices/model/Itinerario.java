@@ -1,115 +1,86 @@
 package com.ingsoftw.v01.natour_webservices.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
-import org.hibernate.validator.constraints.Range;
-
-import java.util.Set;
-
 
 @Entity
-@Table(name = "ITINERARI")
+@Table(name = "itinerari")
 public class Itinerario {
-    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //id autogenerante - primary key
-    private long id;
-    
-    @Column(name = "NOME")
-    private String nome;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_itinerary", nullable = false)
+    private Long id;
 
-    @Column(name = "DURATA")
-    @Min(value=0)
-    private Double durata;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Column(name = "DIFFICOLTA")//toDo
-    @Min(value=0)
-    @Max(value=5)
-  //  @Range(min= 0, max= 5)
-    private Double difficolta;
-    
-    @Column(name = "PUNTEGGIO") //toDo
-    @Min(value=0)
-    @Max(value=5)
-    private Double punteggio;
+    @Column(name = "difficulty", nullable = false)
+    private Double difficulty;
 
-    @ManyToOne
-    @JoinColumn(name="utente_id", nullable=false)
-    @JsonIgnore //ignora i campi dell'oggetto interno di un altro oggetto
-    private Utente utente;
+    @Column(name = "score", nullable = false)
+    private Double score;
 
-    @OneToMany(mappedBy = "itinerario", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private Set<Coordinata> coordinate;
+    @Column(name = "duration", nullable = false)
+    private Double duration;
+
+    @Column(name = "id_user", nullable = false)
+    private Long idUser;
 
     public Itinerario() {}
 
-    public Itinerario(long id, String nome, Double durata, Double difficolta, Double punteggio, Utente utente, Set<Coordinata> coordinate) {
+    public Itinerario(Long id, String name, Double difficulty, Double score, Double duration, Long idUser) {
         this.id = id;
-        this.nome = nome;
-        this.durata = durata;
-        this.difficolta = difficolta;
-        this.punteggio = punteggio;
-        this.utente = utente;
-        this.coordinate = coordinate;
+        this.name = name;
+        this.difficulty = difficulty;
+        this.score = score;
+        this.duration = duration;
+        this.idUser = idUser;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Double getDurata() {
-        return durata;
+    public Double getDifficulty() {
+        return difficulty;
     }
 
-    public void setDurata(Double durata) {
-        this.durata = durata;
+    public void setDifficulty(Double difficulty) {
+        this.difficulty = difficulty;
     }
 
-    public Double getDifficolta() {
-        return difficolta;
+    public Double getScore() {
+        return score;
     }
 
-    public void setDifficolta(Double difficolta) {
-        this.difficolta = difficolta;
+    public void setScore(Double score) {
+        this.score = score;
     }
 
-    public Double getPunteggio() {
-        return punteggio;
+    public Double getDuration() {
+        return duration;
     }
 
-    public void setPunteggio(Double punteggio) {
-        this.punteggio = punteggio;
+    public void setDuration(Double duration) {
+        this.duration = duration;
     }
 
-    public Utente getUtente() {
-        return utente;
+    public Long getIdUser() {
+        return idUser;
     }
 
-    public void setUtente(Utente utente) {
-        this.utente = utente;
-    }
-
-    public Set<Coordinata> getCoordinate() {
-        return coordinate;
-    }
-
-    public void setCoordinate(Set<Coordinata> coordinate) {
-        this.coordinate = coordinate;
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
     }
 }

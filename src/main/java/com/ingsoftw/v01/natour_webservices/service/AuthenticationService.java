@@ -16,8 +16,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Service;
 
-import javax.mail.MessagingException;
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +25,7 @@ import java.util.stream.Collectors;
 //import java.sql.Date;
 
 @Service
-public class AuthenticationService implements IAuthenticationService{
+public class AuthenticationService {
 
     @Autowired
     private UtenteRepository utenteRepository;
@@ -42,7 +40,6 @@ public class AuthenticationService implements IAuthenticationService{
     private ActivationTokenRepository activationTokenRepository;
 
 
-    @Override
     public UtenteDto registrazione(UtenteDto utente) throws Exception {
 
         if(!EmailValidator.patternMatches(utente.getEmail(), EmailValidator.regexPattern))
@@ -59,16 +56,15 @@ public class AuthenticationService implements IAuthenticationService{
         String token = UUID.randomUUID().toString();
         activationToken.setToken(token);
         activationToken.setActivationDate(new Date());
-        activationToken.setUtente(utenteMapper.toModel(utente));
+        activationToken.setUser(utenteMapper.toModel(utente));
         emailService.sendEmailWithAttachment(activationToken);
 
        // Utente utente_registrato = utenteRepository.save(utenteMapper.toModel(utente));
        // ActivationToken activationToken = activationTokenService.saveToken(utente_registrato);
-        Utente utenteNew = activationTokenRepository.save(activationToken).getUtente();
-        return utenteMapper.toDto(utenteNew);
+        Utente newUser = activationTokenRepository.save(activationToken).getUser();
+        return utenteMapper.toDto(newUser);
     }
 
-    @Override
     public UtenteDto attivaUtente(String token) throws Exception {
 
         Optional<ActivationToken> opt = activationTokenRepository.findByToken(token);
@@ -84,7 +80,7 @@ public class AuthenticationService implements IAuthenticationService{
         if(diff > 0)
             throw new AuthenticationException("token scaduto");
 
-        Utente utente = opt.get().getUtente();
+        Utente utente = opt.get().getUser();
         utente.setEnable(true);
         activationTokenRepository.delete(opt.get());
        utenteRepository.save(utente);
@@ -92,7 +88,6 @@ public class AuthenticationService implements IAuthenticationService{
         return null;
     }
 
-    @Override
     public UtenteDto login(UtenteDto utente) throws Exception {
         Optional<Utente> opt = utenteRepository.findByEmail(utente.getEmail()); //nel db restituisce sempre una model quindi il ritorno è un Utente
 
@@ -112,7 +107,7 @@ public class AuthenticationService implements IAuthenticationService{
         return utenteMapper.toDto(utenteRegistrato); //restituisco l'utenteRegistrato di tipo UtenteDto (tramite il mapper)
     }
 
-    @Override
+   
     public String getJWTToken() throws Exception {
         String secretKey = "mySecretKey";
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils

@@ -4,13 +4,10 @@ package com.ingsoftw.v01.natour_webservices.controller;
 import com.ingsoftw.v01.natour_webservices.dto.CoordinataDto;
 import com.ingsoftw.v01.natour_webservices.dto.ItinerarioDto;
 import com.ingsoftw.v01.natour_webservices.dto.JsonResponseDto;
-import com.ingsoftw.v01.natour_webservices.service.IItinerarioService;
 
 import com.ingsoftw.v01.natour_webservices.service.ItinerarioService;
-
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +18,9 @@ import java.util.List;
 @RestController
 @RequestMapping("itinerario") //tutte le api che implemento avranno sull'indirizzo il nome che metto su request mapping
 public class ItinerarioController {
+
     @Autowired
-    private IItinerarioService itinerarioService;
+    private ItinerarioService itinerarioService;
 
     @ApiOperation("Restituisce l'elenco completo degli itinerari")
     @GetMapping(value="/all", produces = "application/json") //l'id sarà visualizzato nell'url (produces = jso significa che il tipo di ritorno è un json)
@@ -76,9 +74,10 @@ public class ItinerarioController {
     @ApiOperation("Aggiunge la difficoltà ad un itinerario")
     @PostMapping(value="/addDifficolta/{id}", produces = "application/json")
     public ResponseEntity<ItinerarioDto> addDifficolta(
-            @ApiParam("difficolta") @RequestBody Integer difficolta,
-            @ApiParam("itinerarioId")  @PathVariable long itinerarioId ) throws Exception {
-        return ResponseEntity.status(HttpStatus.OK).body(itinerarioService.addDifficolta(difficolta,itinerarioId));
+            @ApiParam("difficolta") @RequestBody long difficolta,
+            @ApiParam("itinerarioId")  @PathVariable(value = "itinerarioId") long itinerarioId,
+            @ApiParam("utenteId")  @PathVariable(value = "utenteId") long utenteId) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(itinerarioService.addDifficolta(difficolta,itinerarioId,utenteId));
     }
 
 }

@@ -1,69 +1,71 @@
 package com.ingsoftw.v01.natour_webservices.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ingsoftw.v01.natour_webservices.model.Itinerario;
-import lombok.*;
-
-import java.util.Date;
+import java.sql.Date;
 
 public class CoordinataDto {
-    private long id;
-    private Double lat;
-    private Double lon;
-    private Date createdAt;
-    private Itinerario itinerario;
+    private Long idCoordinate;
+    private java.sql.Date createdAt;
+    private Double langitude;
+    private Double longitude;
+    private String tipology;
+    private Long idItinerary;
 
-    public CoordinataDto() {
-    }
+    public CoordinataDto() {}
 
-    public CoordinataDto(long id, Double lat, Double lon, Date createdAt, Itinerario itinerario) {
-        this.id = id;
-        this.lat = lat;
-        this.lon = lon;
+    public CoordinataDto(Long idCoordinate, Date createdAt, Double langitude, Double longitude, String tipology, Long idItinerary) {
+        this.idCoordinate = idCoordinate;
         this.createdAt = createdAt;
-        this.itinerario = itinerario;
+        this.langitude = langitude;
+        this.longitude = longitude;
+        this.tipology = tipology;
+        this.idItinerary = idItinerary;
     }
 
-
-    public long getId() {
-        return id;
+    public Long getIdCoordinate() {
+        return this.idCoordinate;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setIdCoordinate(Long idCoordinate) {
+        this.idCoordinate = idCoordinate;
     }
 
-    public Double getLat() {
-        return lat;
+    public java.sql.Date getCreatedAt() {
+        return this.createdAt;
     }
 
-    public void setLat(Double lat) {
-        this.lat = lat;
-    }
-
-    public Double getLon() {
-        return lon;
-    }
-
-    public void setLon(Double lon) {
-        this.lon = lon;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(java.sql.Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Itinerario getItinerario() {
-        return itinerario;
+    public Double getLangitude() {
+        return this.langitude;
     }
 
-    public void setItinerario(Itinerario itinerario) {
-        this.itinerario = itinerario;
+    public void setLangitude(Double langitude) {
+        this.langitude = langitude;
+    }
+
+    public Double getLongitude() {
+        return this.longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getTipology() {
+        return this.tipology;
+    }
+
+    public void setTipology(String tipology) {
+        this.tipology = tipology;
+    }
+
+    public Long getIdItinerary() {
+        return this.idItinerary;
+    }
+
+    public void setIdItinerary(Long idItinerary) {
+        this.idItinerary = idItinerary;
     }
 }
-
-

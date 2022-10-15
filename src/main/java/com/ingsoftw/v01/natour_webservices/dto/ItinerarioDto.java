@@ -1,88 +1,69 @@
 package com.ingsoftw.v01.natour_webservices.dto;
 
-
-import com.ingsoftw.v01.natour_webservices.model.Coordinata;
-import com.ingsoftw.v01.natour_webservices.model.Utente;
-
-
-import java.util.Set;
-
 public class ItinerarioDto {
+    private Long idItinerary;
+    private String name;
+    private Double difficulty;
+    private Double score;
+    private Double duration;
+    private Long idUser;
 
-    private long id;
-    private String nome;
-    private Double durata;
-    private Double difficolta;
-    private Double punteggio;
-    private Set<Coordinata> coordinate;
-    private Utente utente;
+    public ItinerarioDto() {}
 
-    public ItinerarioDto() {
+    public ItinerarioDto(Long idItinerary, String name, Double difficulty, Double score, Double duration, Long idUser) {
+        this.idItinerary = idItinerary;
+        this.name = name;
+        this.difficulty = difficulty;
+        this.score = score;
+        this.duration = duration;
+        this.idUser = idUser;
     }
 
-    public ItinerarioDto(long id, String nome, Double durata, Double difficolta, Double punteggio, Set<Coordinata> coordinate, Utente utente) {
-        this.id = id;
-        this.nome = nome;
-        this.durata = durata;
-        this.difficolta = difficolta;
-        this.punteggio = punteggio;
-        this.coordinate = coordinate;
-        this.utente = utente;
+    public Long getIdItinerary() {
+        return this.idItinerary;
     }
 
-    public long getId() {
-        return id;
+    public void setIdItinerary(Long idItinerary) {
+        this.idItinerary = idItinerary;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public String getName() {
+        return this.name;
     }
 
-    public String getNome() {
-        return nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public Double getDifficulty() {
+        return this.difficulty;
     }
 
-    public Double getDurata() {
-        return durata;
+    public void setDifficulty(Double difficulty) {
+        this.difficulty = difficulty;
     }
 
-    public void setDurata(Double durata) {
-        this.durata = durata;
+    public Double getScore() {
+        return this.score;
     }
 
-    public Double getDifficolta() {
-        return difficolta;
+    public void setScore(Double score) {
+        this.score = score;
     }
 
-    public void setDifficolta(Double difficolta) {
-        this.difficolta = difficolta;
+    public Double getDuration() {
+        return this.duration;
     }
 
-    public Double getPunteggio() {
-        return punteggio;
+    public void setDuration(Double duration) {
+        this.duration = duration;
     }
 
-    public void setPunteggio(Double punteggio) {
-        this.punteggio = punteggio;
+    public Long getIdUser() {
+        return this.idUser;
     }
 
-    public Set<Coordinata> getCoordinate() {
-        return coordinate;
-    }
-
-    public void setCoordinate(Set<Coordinata> coordinate) {
-        this.coordinate = coordinate;
-    }
-
-    public Utente getUtente() {
-        return utente;
-    }
-
-    public void setUtente(Utente utente) {
-        this.utente = utente;
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
     }
 }

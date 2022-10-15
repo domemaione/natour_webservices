@@ -1,69 +1,75 @@
 package com.ingsoftw.v01.natour_webservices.model;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ingsoftw.v01.natour_webservices.utils.ValidPassword;
-import lombok.*;
+
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 
 @Entity
-@Table(name="UTENTI")
+@Table(name = "utenti")
 public class Utente {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //id autogenerante - primary key
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_user", nullable = false)
+    private Long id;
 
-    @Column(name="email")
+    @Column(name = "full_name", nullable = false)
+    private String fullName;
+
+    @Column(name = "birth_date", nullable = false)
+    private LocalDate birthDate;
+
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name="password")
-    @ValidPassword
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name="nomeCompleto")
-    private String nomeCompleto;
-
-    @Column(name="dataNascita")
-    private Date dataNascita;
-
-    @Column(name="enable")
-    private boolean enable = false;
-
-    @Column(name="token")
+    @Column(name = "token")
     private String token;
 
+    @Column(name = "enable")
+    private boolean enable;
 
-    //@OneToOne(mappedBy = "utente", cascade = CascadeType.ALL)
-   // @JsonIgnore
-   // private ActivationToken activationToken;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "utente")  //lazy ti carica questo set solo quando lo richiedi
-    @JsonIgnore //ignora l'ogetto interno in fase di visualizzazione
-    private Set<Itinerario> itinerari;
 
     public Utente() {}
 
-    public Utente(long id, String email, String password, String nomeCompleto, Date dataNascita, boolean enable, String token, Set<Itinerario> itinerari) {
+    public Utente(Long id, String fullName, LocalDate birthDate, String email, String password, String token, boolean enable) {
         this.id = id;
+        this.fullName = fullName;
+        this.birthDate = birthDate;
         this.email = email;
         this.password = password;
-        this.nomeCompleto = nomeCompleto;
-        this.dataNascita = dataNascita;
-        this.enable = enable;
         this.token = token;
-        this.itinerari = itinerari;
+        this.enable = enable;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getEmail() {
@@ -82,30 +88,6 @@ public class Utente {
         this.password = password;
     }
 
-    public String getNomeCompleto() {
-        return nomeCompleto;
-    }
-
-    public void setNomeCompleto(String nomeCompleto) {
-        this.nomeCompleto = nomeCompleto;
-    }
-
-    public Date getDataNascita() {
-        return dataNascita;
-    }
-
-    public void setDataNascita(Date dataNascita) {
-        this.dataNascita = dataNascita;
-    }
-
-    public boolean isEnable() {
-        return enable;
-    }
-
-    public void setEnable(boolean enable) {
-        this.enable = enable;
-    }
-
     public String getToken() {
         return token;
     }
@@ -114,11 +96,11 @@ public class Utente {
         this.token = token;
     }
 
-    public Set<Itinerario> getItinerari() {
-        return itinerari;
+    public void setEnable(boolean enable) {
+        this.enable = enable;
     }
 
-    public void setItinerari(Set<Itinerario> itinerari) {
-        this.itinerari = itinerari;
+    public boolean isEnable() {
+        return this.enable;
     }
 }

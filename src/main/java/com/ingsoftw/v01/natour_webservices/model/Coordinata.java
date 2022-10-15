@@ -1,84 +1,87 @@
 package com.ingsoftw.v01.natour_webservices.model;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "COORDINATE")
+@Table(name = "coordinata")
 public class Coordinata {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //id autogenerante - primary key
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_coordinate", nullable = false)
+    private Long id;
 
+    @Column(name = "created_at", nullable = false)
+    private LocalDate createdAt;
 
-    @Column(name="LAT")
-    private Double lat;
+    @Column(name = "langitude", nullable = false)
+    private Double langitude;
 
-    @Column(name="LON")
-    private Double lon;
+    @Column(name = "longitude", nullable = false)
+    private Double longitude;
 
-    @CreatedDate
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private Date createdAt;
+    @Column(name = "tipology", nullable = false)
+    private String tipology;
 
-    @ManyToOne
-    @JoinColumn(name="itinerario_id", nullable=false)
-    @JsonIgnore
-    private Itinerario itinerario;
+    @Column(name = "id_itinerary", nullable = false)
+    private Long idItinerary;
 
     public Coordinata() {}
 
-    public Coordinata(long id, Double lat, Double lon, Date createdAt, Itinerario itinerario) {
+    public Coordinata(Long id, LocalDate createdAt, Double langitude, Double longitude, String tipology, Long idItinerary) {
         this.id = id;
-        this.lat = lat;
-        this.lon = lon;
         this.createdAt = createdAt;
-        this.itinerario = itinerario;
+        this.langitude = langitude;
+        this.longitude = longitude;
+        this.tipology = tipology;
+        this.idItinerary = idItinerary;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Double getLat() {
-        return lat;
-    }
-
-    public void setLat(Double lat) {
-        this.lat = lat;
-    }
-
-    public Double getLon() {
-        return lon;
-    }
-
-    public void setLon(Double lon) {
-        this.lon = lon;
-    }
-
-    public Date getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Itinerario getItinerario() {
-        return itinerario;
+    public Double getLangitude() {
+        return langitude;
     }
 
-    public void setItinerario(Itinerario itinerario) {
-        this.itinerario = itinerario;
+    public void setLangitude(Double langitude) {
+        this.langitude = langitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getTipology() {
+        return tipology;
+    }
+
+    public void setTipology(String tipology) {
+        this.tipology = tipology;
+    }
+
+    public Long getIdItinerary() {
+        return idItinerary;
+    }
+
+    public void setIdItinerary(Long idItinerary) {
+        this.idItinerary = idItinerary;
     }
 }

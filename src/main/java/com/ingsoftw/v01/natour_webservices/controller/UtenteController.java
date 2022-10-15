@@ -1,10 +1,8 @@
 package com.ingsoftw.v01.natour_webservices.controller;
 
-import com.ingsoftw.v01.natour_webservices.dto.CoordinataDto;
-import com.ingsoftw.v01.natour_webservices.dto.UtenteDto;
 import com.ingsoftw.v01.natour_webservices.dto.JsonResponseDto;
 import com.ingsoftw.v01.natour_webservices.dto.UtenteDto;
-import com.ingsoftw.v01.natour_webservices.service.IUtenteService;
+import com.ingsoftw.v01.natour_webservices.service.UtenteService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +16,8 @@ import java.util.List;
 @RequestMapping("utente")
 public class UtenteController {
 
-    @Autowired
-    private IUtenteService utenteService;
+    @Autowired  //crea l'istanza utente service
+    private UtenteService utenteService;
 
     @ApiOperation("Restituisce l'elenco completo degli utenti")
     @GetMapping(value="/all", produces = "application/json") //l'id sarà visualizzato nell'url (produces = jso significa che il tipo di ritorno è un json)
