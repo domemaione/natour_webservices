@@ -30,6 +30,7 @@ public class NatourWebservicesApplication {
 				.apis(RequestHandlerSelectors.basePackage("com.ingsoftw.v01.natour_webservices")).build();
 	}
 
+	//prova
 	@EnableWebSecurity
 	@Configuration
 	class WebSecurityConfig extends WebSecurityConfigurerAdapter {
